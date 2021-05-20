@@ -11,7 +11,6 @@ class HelpdeskTicket(models.Model):
 
     fsm_order_ids = fields.One2many("fsm.order", "ticket_id", string="Service Orders")
     fsm_location_id = fields.Many2one("fsm.location", string="FSM Location")
-    all_orders_closed = fields.Boolean(compute="_compute_all_closed", store=True)
     resolution = fields.Text()
     # these fields are needed to obtain depreciation of onchange in v14
     partner_domain = fields.Integer(compute="_compute_partner_domain")
@@ -20,20 +19,17 @@ class HelpdeskTicket(models.Model):
     @api.constrains("stage_id")
     def _validate_stage_fields(self):
         for rec in self:
-            stage = rec.stage_id
-            if stage.closed:
-                if rec.fsm_order_ids:
-                    closed_orders = rec.fsm_order_ids.filtered(
-                        lambda x: x.stage_id.is_closed
+            if (
+                self.stage_id.closed
+                and rec.fsm_order_ids
+                and not all(rec.fsm_order_ids.mapped("stage_id.is_closed"))
+            ):
+                raise ValidationError(
+                    _(
+                        "Please complete all service orders "
+                        "related to this ticket to close it."
                     )
-                    if len(closed_orders.ids) != len(rec.fsm_order_ids):
-
-                        raise ValidationError(
-                            _(
-                                "Please complete all service orders "
-                                "related to this ticket to close it."
-                            )
-                        )
+                )
 
     def _location_contact_fill(self, loc):
         """loc is a boolean that lets us know if this is coming from the
@@ -81,14 +77,3 @@ class HelpdeskTicket(models.Model):
         res = self.env.ref("fieldservice.fsm_order_form", False)
         action["views"] = [(res and res.id or False, "form")]
         return action
-
-    @api.depends("fsm_order_ids", "stage_id", "fsm_order_ids.stage_id")
-    def _compute_all_closed(self):
-        for ticket in self:
-            ticket.all_orders_closed = True
-            if ticket.fsm_order_ids:
-                for order in ticket.fsm_order_ids:
-                    if order.stage_id.name not in ["Closed", "Cancelled"]:
-                        ticket.all_orders_closed = False
-            else:
-                ticket.all_orders_closed = False
