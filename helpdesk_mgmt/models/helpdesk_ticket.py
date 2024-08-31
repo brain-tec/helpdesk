@@ -328,3 +328,11 @@ class HelpdeskTicket(models.Model):
                 super(HelpdeskTicket, leftover)._notify_get_reply_to(default=default)
             )
         return res
+
+    def _message_track_post_template(self, changes):
+        if (
+            self._context.get("default_fetchmail_server_id")
+            and self._name == "helpdesk.ticket"
+        ):
+            changes.append("stage_id")
+        return super()._message_track_post_template(changes)
