@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [helpdesk_mgmt_rating](helpdesk_mgmt_rating/) | 16.0.1.0.1 |  | This module allows customer to rate the assistance received on a ticket.
 [helpdesk_mgmt_timesheet](helpdesk_mgmt_timesheet/) | 16.0.1.7.1 |  | Add HR Timesheet to the tickets for Helpdesk Management.
 [helpdesk_motive](helpdesk_motive/) | 16.0.1.0.0 | [![nelsonramirezs](https://github.com/nelsonramirezs.png?size=30px)](https://github.com/nelsonramirezs) [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Keep the motive
+[helpdesk_portal_priority](helpdesk_portal_priority/) | 16.0.1.0.0 | [![lbarry-apsl](https://github.com/lbarry-apsl.png?size=30px)](https://github.com/lbarry-apsl) | Helpdesk Portal Priority
 [helpdesk_portal_restriction](helpdesk_portal_restriction/) | 16.0.1.0.0 | [![lbarry-apsl](https://github.com/lbarry-apsl.png?size=30px)](https://github.com/lbarry-apsl) | Helpdesk Portal Restriction
 [helpdesk_product](helpdesk_product/) | 16.0.1.0.1 |  | Add the option to select product in the tickets.
 [helpdesk_ticket_close_inactive](helpdesk_ticket_close_inactive/) | 16.0.1.1.0 | [![miquelalzanillas](https://github.com/miquelalzanillas.png?size=30px)](https://github.com/miquelalzanillas) | Helpdesk Ticket Close Inactive

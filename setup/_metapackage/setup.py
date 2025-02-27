@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo-addon-helpdesk_mgmt_rating>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_timesheet>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_motive>=16.0dev,<16.1dev',
+        'odoo-addon-helpdesk_portal_priority>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_portal_restriction>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_product>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_ticket_close_inactive>=16.0dev,<16.1dev',
