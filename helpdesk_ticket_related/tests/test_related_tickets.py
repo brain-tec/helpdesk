@@ -5,11 +5,10 @@ from odoo.tests.common import TransactionCase
 
 
 class HelpdeskTicketRelatedTickets(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.ticket1 = cls.env.ref("helpdesk_mgmt.helpdesk_ticket_1")
-        cls.ticket2 = cls.env.ref("helpdesk_mgmt.helpdesk_ticket_2")
+    def setUp(self):
+        super().setUp()
+        self.ticket1 = self.env.ref("helpdesk_mgmt.helpdesk_ticket_1")
+        self.ticket2 = self.env.ref("helpdesk_mgmt.helpdesk_ticket_2")
 
     def test_link_tickets(self):
         self.ticket1.related_ticket_ids = [(4, self.ticket2.id)]
