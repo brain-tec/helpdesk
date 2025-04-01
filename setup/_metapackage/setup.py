@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo-addon-helpdesk_ticket_open_tab>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_ticket_partner_response>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_ticket_related>=16.0dev,<16.1dev',
+        'odoo-addon-helpdesk_timesheet_time_type>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_type>=16.0dev,<16.1dev',
     ],
     classifiers=[
