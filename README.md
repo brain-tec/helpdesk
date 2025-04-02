@@ -35,6 +35,7 @@ addon | version | maintainers | summary
 [helpdesk_ticket_open_tab](helpdesk_ticket_open_tab/) | 16.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Helpdesk Ticket Open Tab
 [helpdesk_ticket_partner_response](helpdesk_ticket_partner_response/) | 16.0.1.1.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Change ticket stage when partner response
 [helpdesk_ticket_related](helpdesk_ticket_related/) | 16.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Link tickets to each other
+[helpdesk_timesheet_time_type](helpdesk_timesheet_time_type/) | 16.0.1.0.0 | [![lbarry-apsl](https://github.com/lbarry-apsl.png?size=30px)](https://github.com/lbarry-apsl) | Helpdesk Timesheet Time Type
 [helpdesk_type](helpdesk_type/) | 16.0.1.1.0 | [![nelsonramirezs](https://github.com/nelsonramirezs.png?size=30px)](https://github.com/nelsonramirezs) [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add a type to your tickets
 
 [//]: # (end addons)
