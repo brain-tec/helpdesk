@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-02-15 11:06+0000\n"
+"PO-Revision-Date: 2025-04-01 18:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.2\n"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
@@ -59,6 +59,15 @@ msgstr "<strong class=\"d-block mb-2\">Allegati</strong>"
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
 msgid "<strong>Assignee</strong>"
 msgstr "<strong>Assegnatario</strong>"
+
+#. module: helpdesk_mgmt
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
+msgid ""
+"<strong>Attachments:</strong>\n"
+"                            <br/>"
+msgstr ""
+"<strong>Allegati:</strong>\n"
+"                            <br/>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page

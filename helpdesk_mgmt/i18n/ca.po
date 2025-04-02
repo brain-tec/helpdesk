@@ -62,6 +62,13 @@ msgstr "<strong>Assignat</strong>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
+msgid ""
+"<strong>Attachments:</strong>\n"
+"                            <br/>"
+msgstr ""
+
+#. module: helpdesk_mgmt
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
 msgid "<strong>Category:</strong>"
 msgstr "<strong>Categoria:</strong>"
 
