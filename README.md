@@ -26,6 +26,10 @@ addon | version | maintainers | summary
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 17.0.1.0.1 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 17.0.1.0.1 |  | Add the option to select project in the sale orders.
 [helpdesk_mgmt_stage_validation](helpdesk_mgmt_stage_validation/) | 17.0.1.0.0 |  | Validate input data when reaching a Helpdesk Ticket stage
+[helpdesk_ticket_open_tab](helpdesk_ticket_open_tab/) | 17.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Helpdesk Ticket Open Tab
+[helpdesk_ticket_partner_response](helpdesk_ticket_partner_response/) | 17.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Change ticket stage when partner response
+[helpdesk_ticket_related](helpdesk_ticket_related/) | 17.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Link tickets to each other
+[helpdesk_type](helpdesk_type/) | 17.0.1.0.0 | [![nelsonramirezs](https://github.com/nelsonramirezs.png?size=30px)](https://github.com/nelsonramirezs) [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add a type to your tickets
 
 [//]: # (end addons)
 
