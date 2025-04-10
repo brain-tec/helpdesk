@@ -113,6 +113,20 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-BernatObrador| image:: https://github.com/BernatObrador.png?size=40px
+    :target: https://github.com/BernatObrador
+    :alt: BernatObrador
+.. |maintainer-ppyczko| image:: https://github.com/ppyczko.png?size=40px
+    :target: https://github.com/ppyczko
+    :alt: ppyczko
+.. |maintainer-mpascuall| image:: https://github.com/mpascuall.png?size=40px
+    :target: https://github.com/mpascuall
+    :alt: mpascuall
+
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-BernatObrador| |maintainer-ppyczko| |maintainer-mpascuall| 
+
 This module is part of the `OCA/helpdesk <https://github.com/OCA/helpdesk/tree/16.0/helpdesk_mgmt_portal_follower>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
