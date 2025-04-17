@@ -61,7 +61,7 @@
                     name="create_new_ticket"
                     type="action"
                     class="btn btn-primary"
-                    style="float: right; margin-right: 0px; margin-bottom: 5px;"
+                    style="margin-right: 0px; margin-bottom: 10px;"
                 >New Ticket</button>
                 <input
                     type="hidden"
