@@ -21,13 +21,13 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 17.0.1.0.8 |  | Helpdesk
+[helpdesk_mgmt](helpdesk_mgmt/) | 17.0.1.2.0 |  | Helpdesk
 [helpdesk_mgmt_crm](helpdesk_mgmt_crm/) | 17.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Links helpdesk tickets with leads
 [helpdesk_mgmt_portal_follower](helpdesk_mgmt_portal_follower/) | 17.0.1.0.0 | [![BernatObrador](https://github.com/BernatObrador.png?size=30px)](https://github.com/BernatObrador) [![ppyczko](https://github.com/ppyczko.png?size=30px)](https://github.com/ppyczko) [![mpascuall](https://github.com/mpascuall.png?size=30px)](https://github.com/mpascuall) | Add ticket followers from website portal
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 17.0.1.0.1 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 17.0.1.0.1 |  | Add the option to select project in the sale orders.
 [helpdesk_mgmt_stage_validation](helpdesk_mgmt_stage_validation/) | 17.0.1.0.0 |  | Validate input data when reaching a Helpdesk Ticket stage
-[helpdesk_mgmt_timesheet](helpdesk_mgmt_timesheet/) | 17.0.1.0.0 |  | Add HR Timesheet to the tickets for Helpdesk Management.
+[helpdesk_mgmt_timesheet](helpdesk_mgmt_timesheet/) | 17.0.1.0.1 |  | Add HR Timesheet to the tickets for Helpdesk Management.
 [helpdesk_portal_restriction](helpdesk_portal_restriction/) | 17.0.1.0.0 | [![lbarry-apsl](https://github.com/lbarry-apsl.png?size=30px)](https://github.com/lbarry-apsl) | Helpdesk Portal Restriction
 [helpdesk_ticket_open_tab](helpdesk_ticket_open_tab/) | 17.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Helpdesk Ticket Open Tab
 [helpdesk_ticket_partner_response](helpdesk_ticket_partner_response/) | 17.0.1.0.0 | [![peluko00](https://github.com/peluko00.png?size=30px)](https://github.com/peluko00) | Change ticket stage when partner response
