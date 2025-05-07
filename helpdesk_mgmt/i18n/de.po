@@ -463,6 +463,11 @@ msgid "Channels"
 msgstr "Kanäle"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__child_id
+msgid "Child Categories"
+msgstr ""
+
+#. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 msgid "Close Date"
 msgstr "Tag des Schließens"
@@ -520,6 +525,7 @@ msgid "Company"
 msgstr "Unternehmen"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__complete_name
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__complete_name
 msgid "Complete Name"
 msgstr ""
@@ -762,6 +768,11 @@ msgid "HTTP Routing"
 msgstr ""
 
 #. module: helpdesk_mgmt
+#: model:helpdesk.ticket.category,name:helpdesk_mgmt.helpdesk_category_4
+msgid "Hardware"
+msgstr ""
+
+#. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__has_message
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__has_message
 msgid "Has Message"
@@ -952,6 +963,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__kanban_state
 msgid "Kanban State"
 msgstr "Kanbanstufe"
+
+#. module: helpdesk_mgmt
+#: model:helpdesk.ticket.category,name:helpdesk_mgmt.helpdesk_category_5
+msgid "Laptops"
+msgstr ""
 
 #. module: helpdesk_mgmt
 #. odoo-python
@@ -1195,11 +1211,18 @@ msgid "Other Information"
 msgstr "Weitere Informationen"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__parent_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.view_helpdesk_ticket_category_search
+msgid "Parent Category"
+msgstr ""
+
+#. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__alias_parent_model_id
 msgid "Parent Model"
 msgstr "Übergeordnetes Modell"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__parent_path
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__parent_path
 msgid "Parent Path"
 msgstr ""
