@@ -67,7 +67,9 @@ class HelpdeskTicket(models.Model):
         index=True,
         domain="['|',('team_ids', '=', team_id),('team_ids','=',False)]",
     )
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Contact")
+    partner_id = fields.Many2one(
+        comodel_name="res.partner", string="Contact", check_company=True
+    )
     commercial_partner_id = fields.Many2one(
         string="Commercial Partner",
         store=True,
