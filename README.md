@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 16.0.2.8.0 |  | Helpdesk
+[helpdesk_mgmt](helpdesk_mgmt/) | 16.0.2.9.0 |  | Helpdesk
 [helpdesk_mgmt_merge](helpdesk_mgmt_merge/) | 16.0.1.0.0 |  | Wizard to merge helpdesk tickets
 [helpdesk_mgmt_portal_follower](helpdesk_mgmt_portal_follower/) | 16.0.1.0.1 | [![BernatObrador](https://github.com/BernatObrador.png?size=30px)](https://github.com/BernatObrador) [![ppyczko](https://github.com/ppyczko.png?size=30px)](https://github.com/ppyczko) [![mpascuall](https://github.com/mpascuall.png?size=30px)](https://github.com/mpascuall) | Add ticket followers from website portal
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 16.0.2.3.1 |  | Add the option to select project in the tickets.
