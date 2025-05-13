@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [helpdesk_mgmt_merge](helpdesk_mgmt_merge/) | 18.0.1.0.0 |  | Wizard to merge helpdesk tickets
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 18.0.1.0.0 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 18.0.1.0.0 |  | Add the option to select project in the sale orders.
+[helpdesk_motive](helpdesk_motive/) | 18.0.1.0.0 | [![nelsonramirezs](https://github.com/nelsonramirezs.png?size=30px)](https://github.com/nelsonramirezs) [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Keep the motive
 [helpdesk_product](helpdesk_product/) | 18.0.1.0.0 |  | Add the option to select product in the tickets.
 
 [//]: # (end addons)
