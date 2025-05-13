@@ -33,12 +33,15 @@
                     name="unassigned"
                     domain="[('user_id','=',False)]"
                 />
+                <separator />
                 <filter string="Open" name="open" domain="[('closed', '=', False )]" />
+                <separator />
                 <filter
                     string="Unattended"
                     name="unattended"
                     domain="[('unattended', '=', True )]"
                 />
+                <separator />
                 <filter
                     string="High Priority"
                     name="high_priority"
@@ -73,6 +76,7 @@
                     name="activities_my"
                     domain="[('activity_ids.user_id', '=', uid)]"
                 />
+                <separator />
                 <filter
                     string="Late Activities"
                     name="activities_overdue"
