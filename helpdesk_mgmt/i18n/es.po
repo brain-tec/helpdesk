@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-25 09:29+0000\n"
-"PO-Revision-Date: 2025-04-25 09:29+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-05-12 14:23+0000\n"
+"Last-Translator: DantePereyra <dante.pereyra@ciclosmontecastelo.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
@@ -47,7 +48,7 @@ msgstr "<small class=\"text-right\">Etapa:</small>"
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_kanban_view
 msgid "<span class=\"fw-bolder\">View</span>"
-msgstr ""
+msgstr "<span class=\"fw-bolder\">Vista</span>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
@@ -65,6 +66,9 @@ msgid ""
 "<strong>Attachments:</strong>\n"
 "                            <br/>"
 msgstr ""
+"<strong>Adjuntos:</strong>\n"
+"\n"
+"                            <br/>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
@@ -405,7 +409,7 @@ msgstr "Nombre d'adjunts"
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.view_helpdesk_team_form
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #. module: helpdesk_mgmt
 #: model:helpdesk.ticket.stage,name:helpdesk_mgmt.helpdesk_ticket_stage_awaiting
@@ -468,7 +472,7 @@ msgstr "Canales"
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__child_id
 msgid "Child Categories"
-msgstr ""
+msgstr "Categorías hijas"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
@@ -501,12 +505,12 @@ msgstr "Índice de color"
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_view_search
 msgid "Commercial Entity"
-msgstr ""
+msgstr "Entidad comercial"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__commercial_partner_id
 msgid "Commercial Partner"
-msgstr ""
+msgstr "Contacto comercial"
 
 #. module: helpdesk_mgmt
 #: model:ir.model,name:helpdesk_mgmt.model_res_company
@@ -531,7 +535,7 @@ msgstr "Compañía"
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__complete_name
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__complete_name
 msgid "Complete Name"
-msgstr ""
+msgstr "Nombre completo"
 
 #. module: helpdesk_mgmt
 #: model:ir.model,name:helpdesk_mgmt.model_res_config_settings
@@ -699,7 +703,7 @@ msgstr "Editar"
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__partner_email
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__alias_id
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__alias_email
@@ -715,12 +719,12 @@ msgstr "Plantilla de correo electrónico"
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__email_cc
 msgid "Email cc"
-msgstr ""
+msgstr "Email CC"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,help:helpdesk_mgmt.field_helpdesk_ticket_team__alias_domain
 msgid "Email domain e.g. 'example.com' in 'odoo@example.com'"
-msgstr ""
+msgstr "Dominio de email p.ej. 'ejemplo.com' en 'odoo@ejemplo.com'"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_stage__fold
@@ -1761,7 +1765,7 @@ msgstr "Historial de la comunicación por sitio web"
 #. module: helpdesk_mgmt
 #: model:helpdesk.ticket.category,name:helpdesk_mgmt.helpdesk_category_2
 msgid "Wifi"
-msgstr ""
+msgstr "Wifi"
 
 #. module: helpdesk_mgmt
 #: model:mail.template,subject:helpdesk_mgmt.assignment_email_template
