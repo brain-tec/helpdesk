@@ -65,6 +65,7 @@
                                 name="close_from_portal"
                                 attrs="{'invisible': [('closed', '=', False)]}"
                             />
+                            <field name="fold" />
                             <field name="unattended" />
                         </group>
                     </group>
