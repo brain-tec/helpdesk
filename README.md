@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.3.0 |  | Helpdesk
+[helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.4.0 |  | Helpdesk
 [helpdesk_mgmt_merge](helpdesk_mgmt_merge/) | 18.0.1.0.0 |  | Wizard to merge helpdesk tickets
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 18.0.1.0.0 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 18.0.1.0.0 |  | Add the option to select project in the sale orders.
