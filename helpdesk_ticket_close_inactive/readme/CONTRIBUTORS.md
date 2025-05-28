@@ -1,5 +1,7 @@
-* `APSL-Nagarro <https://apsl.tech>`_:
+- [APSL-Nagarro](https://apsl.tech):
+  - Miquel Alzanillas \<<miquel.alzanillas@nagarro.com>\>
+  - Miquel Pascual \<<miquel.pascual@nagarro.com>\>
+  - Antoni Marroig \<<antoni.marroig@nagarro.com>\>
 
-  * Miquel Alzanillas <miquel.alzanillas@nagarro.com>
 - [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
   - Bhavesh Heliconia
