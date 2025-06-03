@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.4.0 |  | Helpdesk
 [helpdesk_mgmt_merge](helpdesk_mgmt_merge/) | 18.0.1.0.0 |  | Wizard to merge helpdesk tickets
+[helpdesk_mgmt_portal_follower](helpdesk_mgmt_portal_follower/) | 18.0.1.0.0 | [![BernatObrador](https://github.com/BernatObrador.png?size=30px)](https://github.com/BernatObrador) [![ppyczko](https://github.com/ppyczko.png?size=30px)](https://github.com/ppyczko) [![mpascuall](https://github.com/mpascuall.png?size=30px)](https://github.com/mpascuall) | Add ticket followers from website portal
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 18.0.1.0.0 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 18.0.1.0.0 |  | Add the option to select project in the sale orders.
 [helpdesk_motive](helpdesk_motive/) | 18.0.1.0.0 | [![nelsonramirezs](https://github.com/nelsonramirezs.png?size=30px)](https://github.com/nelsonramirezs) [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Keep the motive
