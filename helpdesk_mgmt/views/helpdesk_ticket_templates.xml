@@ -138,8 +138,15 @@
                                 </td>
                                 <td t-if="groupby != 'stage'">
                                     <span
-                                        class="badge badge-pill badge-info"
                                         title="Current stage of the ticket"
+                                        t-attf-class="badge badge-pill rounded-pill
+                                        {{
+                                            'text-bg-success' if (not ticket.unattended) and (not ticket.closed)
+                                            else 'text-bg-info' if ticket.unattended
+                                            else 'text-bg-muted' if ticket.closed
+                                            else ''
+                                        }}"
+                                        t-attf-style="color: {{'#000000' if ticket.closed else ''}};"
                                         t-esc="ticket.stage_id.name"
                                     />
                                 </td>
