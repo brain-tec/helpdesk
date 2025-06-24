@@ -35,6 +35,11 @@ msgid "<em class=\"font-weight-normal text-muted\">Tickets in stage:</em>"
 msgstr "<em class=\"font-weight-normal text-muted\">Aşamadaki biletler:</em>"
 
 #. module: helpdesk_mgmt
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_new_button
+msgid "<i class=\"fa fa-plus me-1\"/><span>New</span>"
+msgstr ""
+
+#. module: helpdesk_mgmt
 #: model:mail.template,body_html:helpdesk_mgmt.assignment_email_template
 msgid ""
 "<p>Hello <t t-out=\"object.user_id.name\"></t>,</p>\n"
@@ -1186,7 +1191,6 @@ msgid "New"
 msgstr "Yeni"
 
 #. module: helpdesk_mgmt
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_home
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_tickets
 msgid "New Ticket"
 msgstr "Yeni Destek Kaydı"
@@ -1734,7 +1738,7 @@ msgstr "Destek Kaydı No"
 #: model:ir.ui.menu,name:helpdesk_mgmt.helpdesk_ticket_menu
 #: model:ir.ui.menu,name:helpdesk_mgmt.helpdesk_ticket_reporting_analysis
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_layout
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_home
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_home_tickets_entry
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_tickets
 msgid "Tickets"
 msgstr "Destek Kayıtları"
