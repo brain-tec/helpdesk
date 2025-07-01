@@ -21,8 +21,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 14.0.2.14.0 |  | Helpdesk
-[helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 14.0.1.1.2 |  | Create service orders from a ticket
+[helpdesk_mgmt](helpdesk_mgmt/) | 14.0.2.14.1 |  | Helpdesk
+[helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 14.0.1.1.4 |  | Create service orders from a ticket
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 14.0.1.2.1 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_rating](helpdesk_mgmt_rating/) | 14.0.1.3.0 |  | This module allows customer to rate the assistance received on a ticket.
 [helpdesk_mgmt_sla](helpdesk_mgmt_sla/) | 14.0.2.0.1 |  | Add SLA to the tickets for Helpdesk Management.
