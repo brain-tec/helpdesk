@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo14-addon-helpdesk_mgmt_stage_validation',
         'odoo14-addon-helpdesk_mgmt_timesheet',
         'odoo14-addon-helpdesk_motive',
+        'odoo14-addon-helpdesk_ticket_related',
         'odoo14-addon-helpdesk_type',
         'odoo14-addon-helpdesk_type_sla',
     ],
