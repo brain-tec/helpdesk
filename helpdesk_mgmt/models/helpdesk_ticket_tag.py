@@ -7,7 +7,7 @@ class HelpdeskTicketTag(models.Model):
     _order = "sequence,id"
 
     sequence = fields.Integer(default=10)
-    name = fields.Char(translatable=True)
+    name = fields.Char(translate=True)
     color = fields.Integer(string="Color Index")
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(
