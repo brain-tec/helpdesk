@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo-addon-helpdesk_mgmt_project_stage>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_rating>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_sale>=16.0dev,<16.1dev',
+        'odoo-addon-helpdesk_mgmt_sla>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_stage_validation>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_template>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_timesheet>=16.0dev,<16.1dev',
