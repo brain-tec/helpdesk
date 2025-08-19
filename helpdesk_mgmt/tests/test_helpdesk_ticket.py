@@ -212,3 +212,13 @@ class TestHelpdeskTicket(TestHelpdeskTicketBase):
         with Form(new_ticket.sudo()) as new_ticket_form:
             new_ticket_form.team_id = new_team
             self.assertFalse(new_ticket_form.user_id)
+
+    def test_ticket_change_user_no_stage_reset(self):
+        in_progress_stage = self.env.ref(
+            "helpdesk_mgmt.helpdesk_ticket_stage_in_progress"
+        )
+        new_ticket = self._create_ticket(self.team_a, user=self.user_own)
+        with Form(new_ticket.sudo()) as new_ticket_form:
+            new_ticket_form.stage_id = in_progress_stage
+            new_ticket_form.user_id = self.user
+        self.assertEqual(new_ticket_form.stage_id, in_progress_stage)
