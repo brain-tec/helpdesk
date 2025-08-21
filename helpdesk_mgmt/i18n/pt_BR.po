@@ -6,16 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-19 16:06+0000\n"
-"Last-Translator: Rodrigo Sottomaior Macedo "
-"<sottomaiormacedotec@sottomaiormacedo.tech>\n"
+"PO-Revision-Date: 2025-08-21 02:32+0000\n"
+"Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: helpdesk_mgmt
 #. odoo-javascript
@@ -38,7 +37,7 @@ msgstr "<em class=\"font-weight-normal text-muted\">Chamados no estagio:</em>"
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_new_button
 msgid "<i class=\"fa fa-plus me-1\"/><span>New</span>"
-msgstr ""
+msgstr "<i class=\"fa fa-plus me-1\"/><span>Novo</span>"
 
 #. module: helpdesk_mgmt
 #: model:mail.template,body_html:helpdesk_mgmt.assignment_email_template
@@ -754,7 +753,7 @@ msgstr "Valores Padrão"
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_category__default_team_id
 msgid "Default team"
-msgstr ""
+msgstr "Equipe padrão"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.view_helpdesk_ticket_kanban
@@ -871,7 +870,7 @@ msgstr "Ícone Fonte awesome e.x fa-tasks"
 #. module: helpdesk_mgmt
 #: model:helpdesk.ticket.tag,name:helpdesk_mgmt.helpdesk_tag_3
 msgid "Functional"
-msgstr ""
+msgstr "Funcional"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_view_search
@@ -896,7 +895,7 @@ msgstr "Roteamento HTTP"
 #. module: helpdesk_mgmt
 #: model:helpdesk.ticket.tag,name:helpdesk_mgmt.helpdesk_tag_1
 msgid "Hard"
-msgstr ""
+msgstr "Difícil"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__has_message
@@ -1631,7 +1630,7 @@ msgstr "Equipes"
 #. module: helpdesk_mgmt
 #: model:helpdesk.ticket.tag,name:helpdesk_mgmt.helpdesk_tag_2
 msgid "Technical"
-msgstr ""
+msgstr "Técnico"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,help:helpdesk_mgmt.field_helpdesk_ticket_team__alias_id
