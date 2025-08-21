@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-helpdesk"
-version = "18.0.20250819.0"
+version = "18.0.20250821.0"
 dependencies = [
     "odoo-addon-helpdesk_mgmt==18.0.*",
     "odoo-addon-helpdesk_mgmt_fieldservice==18.0.*",
@@ -15,6 +15,7 @@ dependencies = [
     "odoo-addon-helpdesk_portal_restriction==18.0.*",
     "odoo-addon-helpdesk_product==18.0.*",
     "odoo-addon-helpdesk_ticket_related==18.0.*",
+    "odoo-addon-helpdesk_type==18.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
