@@ -203,6 +203,8 @@ class HelpdeskTicket(models.Model):
                     vals["closed_date"] = now
             if vals.get("user_id"):
                 vals["assigned_date"] = now
+            if "stage_id" in vals and "kanban_state" not in vals:
+                vals["kanban_state"] = False
         return super().write(vals)
 
     def action_duplicate_tickets(self):
