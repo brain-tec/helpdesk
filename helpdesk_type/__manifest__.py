@@ -4,7 +4,7 @@
 
 {
     "name": "Helpdesk Ticket Type",
-    "version": "18.0.1.1.0",
+    "version": "18.0.1.2.0",
     "license": "AGPL-3",
     "summary": "Add a type to your tickets",
     "author": "Konos, " "Open Source Integrators, " "Odoo Community Association (OCA)",
