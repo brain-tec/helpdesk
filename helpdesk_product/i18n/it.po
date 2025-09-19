@@ -33,6 +33,11 @@ msgid "Create a new product"
 msgstr "Crea un nuovo prodotto"
 
 #. module: helpdesk_product
+#: model_terms:ir.ui.view,arch_db:helpdesk_product.product_view_template
+msgid "Helpdesk"
+msgstr ""
+
+#. module: helpdesk_product
 #: model:ir.model,name:helpdesk_product.model_helpdesk_ticket
 msgid "Helpdesk Ticket"
 msgstr "Ticket assistenza clienti"
@@ -58,12 +63,20 @@ msgstr "Prodotti"
 #. module: helpdesk_product
 #: model_terms:ir.actions.act_window,help:helpdesk_product.product_template_action_helpdesk
 msgid ""
-"You currently have no products available for Helpdesk Tickets.\n"
-"            <br>\n"
-"                A product can be either a physical product or a service that you sell to your customers."
+"You currently have no products available for Helpdesk Tickets. <br> A "
+"product can\n"
+"                be either a physical product or a service that you sell to "
+"your customers."
 msgstr ""
-"Attualmente non ci sono prodotti disponibili per i ticket di assistenza "
-"clienti.\n"
-"            <br>\n"
-"                Un prodotto può essere sia un prodotto fisico sia un "
-"servizio che si vende ai clienti."
+
+#~ msgid ""
+#~ "You currently have no products available for Helpdesk Tickets.\n"
+#~ "            <br>\n"
+#~ "                A product can be either a physical product or a service "
+#~ "that you sell to your customers."
+#~ msgstr ""
+#~ "Attualmente non ci sono prodotti disponibili per i ticket di assistenza "
+#~ "clienti.\n"
+#~ "            <br>\n"
+#~ "                Un prodotto può essere sia un prodotto fisico sia un "
+#~ "servizio che si vende ai clienti."
