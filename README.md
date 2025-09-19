@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.10.0 |  | Helpdesk
+[helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.11.0 |  | Helpdesk
 [helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 18.0.1.0.0 |  | Create service orders from a ticket
 [helpdesk_mgmt_fieldservice_equipment](helpdesk_mgmt_fieldservice_equipment/) | 18.0.1.0.0 |  | Helpdesk Ticket Field Service Equipment
 [helpdesk_mgmt_fieldservice_equipment_warranty](helpdesk_mgmt_fieldservice_equipment_warranty/) | 18.0.1.0.0 |  | Helpdesk Ticket Equipment Warranty
