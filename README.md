@@ -22,14 +22,16 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.12.0 |  | Helpdesk
-[helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 18.0.1.0.0 |  | Create service orders from a ticket
+[helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 18.0.1.1.0 |  | Create service orders from a ticket
 [helpdesk_mgmt_fieldservice_equipment](helpdesk_mgmt_fieldservice_equipment/) | 18.0.1.0.0 |  | Helpdesk Ticket Field Service Equipment
 [helpdesk_mgmt_fieldservice_equipment_warranty](helpdesk_mgmt_fieldservice_equipment_warranty/) | 18.0.1.0.0 |  | Helpdesk Ticket Equipment Warranty
+[helpdesk_mgmt_fieldservice_project](helpdesk_mgmt_fieldservice_project/) | 18.0.1.0.0 |  | Helpdesk Mgmt Fieldservice Project
 [helpdesk_mgmt_merge](helpdesk_mgmt_merge/) | 18.0.1.0.1 |  | Wizard to merge helpdesk tickets
 [helpdesk_mgmt_portal_follower](helpdesk_mgmt_portal_follower/) | 18.0.1.0.0 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> <a href='https://github.com/ppyczko'><img src='https://github.com/ppyczko.png' width='32' height='32' style='border-radius:50%;' alt='ppyczko'/></a> <a href='https://github.com/mpascuall'><img src='https://github.com/mpascuall.png' width='32' height='32' style='border-radius:50%;' alt='mpascuall'/></a> | Add ticket followers from website portal
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 18.0.1.2.0 |  | Add the option to select project in the tickets.
 [helpdesk_mgmt_rating](helpdesk_mgmt_rating/) | 18.0.1.0.0 |  | This module allows customer to rate the assistance received on a ticket.
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 18.0.1.0.0 |  | Add the option to select project in the sale orders.
+[helpdesk_mgmt_sale_project](helpdesk_mgmt_sale_project/) | 18.0.1.0.0 |  | Helpdesk Sale Project
 [helpdesk_mgmt_sla](helpdesk_mgmt_sla/) | 18.0.2.0.0 |  | Add SLA to the tickets for Helpdesk Management.
 [helpdesk_mgmt_stage_validation](helpdesk_mgmt_stage_validation/) | 18.0.1.0.0 |  | Validate input data when reaching a Helpdesk Ticket stage
 [helpdesk_mgmt_timesheet](helpdesk_mgmt_timesheet/) | 18.0.1.0.2 |  | Add HR Timesheet to the tickets for Helpdesk Management.
