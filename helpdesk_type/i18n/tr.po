@@ -42,14 +42,6 @@ msgid "Config Settings"
 msgstr "Yapılandırma Ayarları"
 
 #. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid ""
-"Controls if the types are visible on the portal and if they are required."
-msgstr ""
-"Türlerin portalda görünür olup olmadığını ve gerekli olup olmadığını kontrol "
-"eder."
-
-#. module: helpdesk_type
 #: model:ir.model.fields,field_description:helpdesk_type.field_helpdesk_ticket_type__create_uid
 msgid "Created by"
 msgstr "Oluşturan"
@@ -58,11 +50,6 @@ msgstr "Oluşturan"
 #: model:ir.model.fields,field_description:helpdesk_type.field_helpdesk_ticket_type__create_date
 msgid "Created on"
 msgstr "Oluşturulma"
-
-#. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid "Display"
-msgstr "Göster"
 
 #. module: helpdesk_type
 #: model:ir.model.fields,field_description:helpdesk_type.field_helpdesk_ticket_type__display_name
@@ -116,11 +103,6 @@ msgid "Name"
 msgstr "İsim"
 
 #. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid "Required"
-msgstr "Zorunlu"
-
-#. module: helpdesk_type
 #: model:ir.model.fields,field_description:helpdesk_type.field_res_company__helpdesk_mgmt_portal_type_id_required
 #: model:ir.model.fields,field_description:helpdesk_type.field_res_config_settings__helpdesk_mgmt_portal_type_id_required
 msgid "Required Type field in Helpdesk portal"
@@ -157,8 +139,8 @@ msgstr "Talep Türleri"
 #. module: helpdesk_type
 #: model:ir.model.fields,help:helpdesk_type.field_helpdesk_ticket_team__type_ids
 msgid ""
-"Ticket Types the team will use. This team's tickets will only be able to use"
-" those types."
+"Ticket Types the team will use. This team's tickets will only be able to use "
+"those types."
 msgstr ""
 "Takımın kullanacağı destek kaydı türleri. Bu takımın destek kayıtları "
 "yalnızca bu türleri kullanabilecektir."
@@ -169,10 +151,21 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_type.helpdesk_ticket_view_search
 #: model_terms:ir.ui.view,arch_db:helpdesk_type.portal_create_ticket
 #: model_terms:ir.ui.view,arch_db:helpdesk_type.portal_ticket_list
+#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
 msgid "Type"
 msgstr "Tür"
 
-#. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid "Types"
-msgstr "Türler"
+#~ msgid ""
+#~ "Controls if the types are visible on the portal and if they are required."
+#~ msgstr ""
+#~ "Türlerin portalda görünür olup olmadığını ve gerekli olup olmadığını "
+#~ "kontrol eder."
+
+#~ msgid "Display"
+#~ msgstr "Göster"
+
+#~ msgid "Required"
+#~ msgstr "Zorunlu"
+
+#~ msgid "Types"
+#~ msgstr "Türler"

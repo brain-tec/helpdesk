@@ -43,12 +43,6 @@ msgid "Config Settings"
 msgstr "Ajustes de configuración"
 
 #. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid ""
-"Controls if the types are visible on the portal and if they are required."
-msgstr "Controla si los tipos son visibles en el portal y si son obligatorios."
-
-#. module: helpdesk_type
 #: model:ir.model.fields,field_description:helpdesk_type.field_helpdesk_ticket_type__create_uid
 msgid "Created by"
 msgstr "Creado por"
@@ -59,14 +53,14 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid "Display"
-msgstr "Mostrar"
-
-#. module: helpdesk_type
 #: model:ir.model.fields,field_description:helpdesk_type.field_helpdesk_ticket_type__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: helpdesk_type
+#: model:helpdesk.ticket.type,name:helpdesk_type.helpdesk_type_1
+msgid "Document issue"
+msgstr ""
 
 #. module: helpdesk_type
 #: model:ir.model,name:helpdesk_type.model_helpdesk_ticket
@@ -108,11 +102,6 @@ msgstr "??ltima actualizaci??n el"
 #: model:ir.model.fields,field_description:helpdesk_type.field_helpdesk_ticket_type__name
 msgid "Name"
 msgstr "Nombre"
-
-#. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid "Required"
-msgstr "Requerido"
 
 #. module: helpdesk_type
 #: model:ir.model.fields,field_description:helpdesk_type.field_res_company__helpdesk_mgmt_portal_type_id_required
@@ -163,10 +152,20 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_type.helpdesk_ticket_view_search
 #: model_terms:ir.ui.view,arch_db:helpdesk_type.portal_create_ticket
 #: model_terms:ir.ui.view,arch_db:helpdesk_type.portal_ticket_list
+#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
 msgid "Type"
 msgstr "Tipo"
 
-#. module: helpdesk_type
-#: model_terms:ir.ui.view,arch_db:helpdesk_type.res_config_settings_view_form_inherit_select_type
-msgid "Types"
-msgstr "Tipos"
+#~ msgid ""
+#~ "Controls if the types are visible on the portal and if they are required."
+#~ msgstr ""
+#~ "Controla si los tipos son visibles en el portal y si son obligatorios."
+
+#~ msgid "Display"
+#~ msgstr "Mostrar"
+
+#~ msgid "Required"
+#~ msgstr "Requerido"
+
+#~ msgid "Types"
+#~ msgstr "Tipos"
