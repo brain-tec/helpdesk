@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-helpdesk_mgmt>=16.0dev,<16.1dev',
+        'odoo-addon-helpdesk_mgmt_assign_method>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_merge>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_portal_follower>=16.0dev,<16.1dev',
         'odoo-addon-helpdesk_mgmt_project>=16.0dev,<16.1dev',
