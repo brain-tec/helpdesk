@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.15.0 |  | Helpdesk
+[helpdesk_mgmt](helpdesk_mgmt/) | 18.0.1.15.1 |  | Helpdesk
 [helpdesk_mgmt_crm](helpdesk_mgmt_crm/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Links helpdesk tickets with leads
 [helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 18.0.1.1.0 |  | Create service orders from a ticket
 [helpdesk_mgmt_fieldservice_equipment](helpdesk_mgmt_fieldservice_equipment/) | 18.0.1.0.0 |  | Helpdesk Ticket Field Service Equipment
