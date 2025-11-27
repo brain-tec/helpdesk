@@ -17,6 +17,11 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 
 #. module: helpdesk_motive
+#: model:helpdesk.ticket.motive,name:helpdesk_motive.helpdesk_motive_1
+msgid "Client requirement"
+msgstr ""
+
+#. module: helpdesk_motive
 #: model:ir.model.fields,field_description:helpdesk_motive.field_helpdesk_ticket_motive__create_uid
 msgid "Created by"
 msgstr "Creato da"
@@ -94,3 +99,8 @@ msgstr "Motivi"
 #: model:ir.model.fields,field_description:helpdesk_motive.field_helpdesk_ticket_motive__name
 msgid "Name"
 msgstr "Nome"
+
+#. module: helpdesk_motive
+#: model:helpdesk.ticket.motive,name:helpdesk_motive.helpdesk_motive_2
+msgid "Update required"
+msgstr ""
