@@ -101,6 +101,11 @@
                     domain="[('kanban_state', '=', 'blocked')]"
                 />
                 <filter
+                    string="Not Blocked"
+                    name="kanban_state_not_blocked"
+                    domain="[('kanban_state', '!=', 'blocked')]"
+                />
+                <filter
                     string="Ready for next stage"
                     name="kanban_state_done"
                     domain="[('kanban_state', '=', 'done')]"
