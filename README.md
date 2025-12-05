@@ -30,7 +30,7 @@ addon | version | maintainers | summary
 [helpdesk_mgmt_project_domain](helpdesk_mgmt_project_domain/) | 16.0.1.0.0 | <a href='https://github.com/marcelsavegnago'><img src='https://github.com/marcelsavegnago.png' width='32' height='32' style='border-radius:50%;' alt='marcelsavegnago'/></a> | Enable to set a project domain on ticket
 [helpdesk_mgmt_project_stage](helpdesk_mgmt_project_stage/) | 16.0.1.0.0 | <a href='https://github.com/hbrunn'><img src='https://github.com/hbrunn.png' width='32' height='32' style='border-radius:50%;' alt='hbrunn'/></a> | Keeps the stages of tickets and tasks in sync
 [helpdesk_mgmt_rating](helpdesk_mgmt_rating/) | 16.0.1.0.1 |  | This module allows customer to rate the assistance received on a ticket.
-[helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 16.0.1.0.0 |  | Add the option to select project in the sale orders.
+[helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 16.0.1.0.1 |  | Add the option to select project in the sale orders.
 [helpdesk_mgmt_sla](helpdesk_mgmt_sla/) | 16.0.1.0.0 |  | Add SLA to the tickets for Helpdesk Management.
 [helpdesk_mgmt_stage_validation](helpdesk_mgmt_stage_validation/) | 16.0.1.0.1 |  | Validate input data when reaching a Helpdesk Ticket stage
 [helpdesk_mgmt_template](helpdesk_mgmt_template/) | 16.0.1.0.0 |  | Create Helpdesk Ticket Template
