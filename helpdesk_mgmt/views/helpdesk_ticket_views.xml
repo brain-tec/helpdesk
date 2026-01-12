@@ -28,6 +28,7 @@
                 <field name="name" />
                 <field name="tag_ids" />
                 <field name="stage_id" />
+                <field name="description" />
                 <filter
                     string="Unassigned"
                     name="unassigned"
