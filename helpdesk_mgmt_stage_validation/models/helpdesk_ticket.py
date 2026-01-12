@@ -12,23 +12,26 @@ class HelpdeskTicket(models.Model):
         self.ensure_one()
         error_message = False
         field_ids = self.stage_id.sudo().validate_field_ids
-        field_names = [x.name for x in field_ids]
-        values = self.read(field_names)
-        labels = self.fields_get(field_names, attributes=["string"])
-        fields = [
-            labels[field.name]["string"]
-            for field in field_ids
-            if not values[0][field.name]
-        ]
-        fields = ", ".join(fields)
-        if fields:
-            error_message = _(
-                "Ticket %(ticket)s can't be moved to the stage %(stage)s until "
-                "the following fields are set: %(fields)s.",
-                ticket=self.name,
-                stage=self.stage_id.name,
-                fields=fields,
-            )
+        if field_ids:
+            # Otherwise `self.read([])` reads all the fields
+            # and the user might not have enough access rights to read them
+            field_names = [x.name for x in field_ids]
+            values = self.read(field_names)
+            labels = self.fields_get(field_names, attributes=["string"])
+            fields = [
+                labels[field.name]["string"]
+                for field in field_ids
+                if not values[0][field.name]
+            ]
+            fields = ", ".join(fields)
+            if fields:
+                error_message = _(
+                    "Ticket %(ticket)s can't be moved to the stage %(stage)s until "
+                    "the following fields are set: %(fields)s.",
+                    ticket=self.name,
+                    stage=self.stage_id.name,
+                    fields=fields,
+                )
         return error_message
 
     def _validate_stage_fields_error_message(self):
