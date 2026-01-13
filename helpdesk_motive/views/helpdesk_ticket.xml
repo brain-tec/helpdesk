@@ -9,7 +9,7 @@
             <field name="tag_ids" position="before">
                 <field
                     name="motive_id"
-                    domain="[('team_id', '=', team_id)]"
+                    domain="['|' , ('team_id', '=', team_id), ('team_id', '=', False)]"
                     options="{'no_open': True, 'no_create': True}"
                 />
             </field>

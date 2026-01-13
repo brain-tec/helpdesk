@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [helpdesk_mgmt](helpdesk_mgmt/) | 16.0.2.12.9 |  | Helpdesk
 [helpdesk_mgmt_activity](helpdesk_mgmt_activity/) | 16.0.1.0.0 |  | Create Activities for Odoo records from the Helpdesk
 [helpdesk_mgmt_assign_method](helpdesk_mgmt_assign_method/) | 16.0.1.0.0 |  | Helpdesk Assign Method
+[helpdesk_mgmt_fieldservice](helpdesk_mgmt_fieldservice/) | 16.0.1.0.0 |  | Create service orders from a ticket
 [helpdesk_mgmt_merge](helpdesk_mgmt_merge/) | 16.0.1.0.1 |  | Wizard to merge helpdesk tickets
 [helpdesk_mgmt_portal_follower](helpdesk_mgmt_portal_follower/) | 16.0.1.0.1 | <a href='https://github.com/BernatObrador'><img src='https://github.com/BernatObrador.png' width='32' height='32' style='border-radius:50%;' alt='BernatObrador'/></a> <a href='https://github.com/ppyczko'><img src='https://github.com/ppyczko.png' width='32' height='32' style='border-radius:50%;' alt='ppyczko'/></a> <a href='https://github.com/mpascuall'><img src='https://github.com/mpascuall.png' width='32' height='32' style='border-radius:50%;' alt='mpascuall'/></a> | Add ticket followers from website portal
 [helpdesk_mgmt_project](helpdesk_mgmt_project/) | 16.0.2.3.1 |  | Add the option to select project in the tickets.
@@ -35,7 +36,7 @@ addon | version | maintainers | summary
 [helpdesk_mgmt_stage_validation](helpdesk_mgmt_stage_validation/) | 16.0.1.0.1 |  | Validate input data when reaching a Helpdesk Ticket stage
 [helpdesk_mgmt_template](helpdesk_mgmt_template/) | 16.0.1.0.0 |  | Create Helpdesk Ticket Template
 [helpdesk_mgmt_timesheet](helpdesk_mgmt_timesheet/) | 16.0.1.7.2 |  | Add HR Timesheet to the tickets for Helpdesk Management.
-[helpdesk_motive](helpdesk_motive/) | 16.0.1.0.1 | <a href='https://github.com/nelsonramirezs'><img src='https://github.com/nelsonramirezs.png' width='32' height='32' style='border-radius:50%;' alt='nelsonramirezs'/></a> <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> | Keep the motive
+[helpdesk_motive](helpdesk_motive/) | 16.0.1.0.2 | <a href='https://github.com/nelsonramirezs'><img src='https://github.com/nelsonramirezs.png' width='32' height='32' style='border-radius:50%;' alt='nelsonramirezs'/></a> <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> | Keep the motive
 [helpdesk_portal_priority](helpdesk_portal_priority/) | 16.0.1.0.0 | <a href='https://github.com/lbarry-apsl'><img src='https://github.com/lbarry-apsl.png' width='32' height='32' style='border-radius:50%;' alt='lbarry-apsl'/></a> | Helpdesk Portal Priority
 [helpdesk_portal_restriction](helpdesk_portal_restriction/) | 16.0.1.0.1 | <a href='https://github.com/lbarry-apsl'><img src='https://github.com/lbarry-apsl.png' width='32' height='32' style='border-radius:50%;' alt='lbarry-apsl'/></a> | Helpdesk Portal Restriction
 [helpdesk_product](helpdesk_product/) | 16.0.1.0.1 |  | Add the option to select product in the tickets.
