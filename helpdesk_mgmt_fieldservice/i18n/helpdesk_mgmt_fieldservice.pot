@@ -19,11 +19,6 @@ msgid "# Tickets"
 msgstr ""
 
 #. module: helpdesk_mgmt_fieldservice
-#: model:ir.model.fields,field_description:helpdesk_mgmt_fieldservice.field_helpdesk_ticket__all_orders_closed
-msgid "All Orders Closed"
-msgstr ""
-
-#. module: helpdesk_mgmt_fieldservice
 #: model:ir.model.fields,field_description:helpdesk_mgmt_fieldservice.field_helpdesk_ticket__all_partners
 msgid "All Partners"
 msgstr ""
