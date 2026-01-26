@@ -75,8 +75,12 @@ class HelpdeskTicket(models.Model):
         store=True,
         related="partner_id.commercial_partner_id",
     )
-    partner_name = fields.Char()
-    partner_email = fields.Char(string="Email")
+    partner_name = fields.Char(
+        compute="_compute_partner_name", store=True, readonly=False
+    )
+    partner_email = fields.Char(
+        string="Email", compute="_compute_partner_email", store=True, readonly=False
+    )
     last_stage_update = fields.Datetime(default=fields.Datetime.now)
     assigned_date = fields.Datetime()
     closed_date = fields.Datetime()
@@ -150,6 +154,22 @@ class HelpdeskTicket(models.Model):
         if self.partner_id:
             self.partner_name = self.partner_id.name
             self.partner_email = self.partner_id.email
+
+    @api.depends("partner_id")
+    def _compute_partner_name(self):
+        for ticket in self:
+            if ticket.partner_id and ticket.partner_id.name:
+                ticket.partner_name = ticket.partner_id.name
+            else:
+                ticket.partner_name = ""
+
+    @api.depends("partner_id")
+    def _compute_partner_email(self):
+        for ticket in self:
+            if ticket.partner_id and ticket.partner_id.email:
+                ticket.partner_email = ticket.partner_id.email
+            else:
+                ticket.partner_email = ""
 
     # ---------------------------------------------------
     # CRUD
