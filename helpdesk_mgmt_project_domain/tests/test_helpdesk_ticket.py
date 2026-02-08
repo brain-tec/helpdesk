@@ -1,6 +1,11 @@
 # Copyright 2025 Marcel Savegnago - https://www.escodoo.com.br
+# Copyright 2026 Kaynnan Lemes - https://www.escodoo.com.br
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import logging
+from contextlib import contextmanager
+
+from odoo.exceptions import ValidationError
 from odoo.osv import expression
 
 from odoo.addons.helpdesk_mgmt.tests.common import TestHelpdeskTicketBase
@@ -10,966 +15,379 @@ class TestHelpdeskProjectDomain(TestHelpdeskTicketBase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Usar team_a da classe base em vez de criar novo team
-        cls.team = cls.team_a
-        cls.project_1 = cls.env["project.project"].create(
-            {
-                "name": "Project 1",
-                "active": True,
-            }
+        cls.helpdesk_team = getattr(
+            cls, "team_a", cls.env["helpdesk.ticket.team"].search([], limit=1)
         )
-        cls.project_2 = cls.env["project.project"].create(
-            {
-                "name": "Project 2",
-                "active": False,
-            }
+        cls.active_project = cls.env["project.project"].create(
+            {"name": "Active Project", "active": True}
+        )
+        cls.inactive_project = cls.env["project.project"].create(
+            {"name": "Inactive Project", "active": False}
         )
 
-    def test_team_project_domain(self):
-        """Test project domain from team when company has no domain"""
-        # Clear company domain first
+    def _reset_domain_configuration(self):
         self.company.helpdesk_mgmt_project_domain = False
+        self.company.helpdesk_mgmt_task_domain = False
+        self.helpdesk_team.project_domain = False
+        self.helpdesk_team.project_domain_python = False
+        self.helpdesk_team.task_domain = False
+        self.helpdesk_team.task_domain_python = False
 
-        # Set domain in team (using widget domain format)
-        self.team.project_domain = "[('active', '=', True)]"
+    def _create_ticket_minimal(self, **ticket_values):
+        values = {
+            "name": ticket_values.pop("name", "T"),
+            "description": ticket_values.pop("description", "Test ticket description"),
+            "team_id": ticket_values.pop("team_id", self.helpdesk_team.id),
+        }
+        values.update(ticket_values)
+        return self.env["helpdesk.ticket"].create(values)
 
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
+    @contextmanager
+    def _mute_helpdesk_ticket_logger(self):
+        logger = logging.getLogger(
+            "odoo.addons.helpdesk_mgmt_project_domain.models.helpdesk_ticket"
         )
+        previous_level = logger.level
+        previous_propagate = logger.propagate
+        try:
+            logger.setLevel(logging.CRITICAL)
+            logger.propagate = False
+            yield
+        finally:
+            logger.setLevel(previous_level)
+            logger.propagate = previous_propagate
 
-        # Get domain - should be only team domain
-        domain = ticket._get_project_domain()
-        self.assertEqual(domain, [("active", "=", True)])
+    def test_field_domains_are_bound_to_computed_domain_ids(self):
+        field_domain_cases = [
+            ("project_id", "[('id', 'in', project_domain_ids)]"),
+            ("task_id", "[('id', 'in', task_domain_ids)]"),
+        ]
+        for field_name, expected_domain in field_domain_cases:
+            with self.subTest(field=field_name):
+                field = self.env["helpdesk.ticket"]._fields[field_name]
+                self.assertEqual(field.domain, expected_domain)
 
-    def test_company_project_domain(self):
-        """Test project domain from company when team has no domain"""
-        # Clear team domain first
-        self.team.project_domain = False
+    def test_project_domain_sources_static_and_combined(self):
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain = "[('active', '=', True)]"
+        team_only_ticket = self._create_ticket_minimal(name="T_team_only")
+        self.assertEqual(
+            team_only_ticket._get_project_domain(), [("active", "=", True)]
+        )
+        self.assertIn(self.active_project, team_only_ticket.project_domain_ids)
+        self.assertNotIn(self.inactive_project, team_only_ticket.project_domain_ids)
 
-        # Set domain in company (using widget domain format)
+        self._reset_domain_configuration()
         self.company.helpdesk_mgmt_project_domain = "[('active', '=', True)]"
-
-        # Create ticket with team (no domain)
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
+        company_only_ticket = self._create_ticket_minimal(name="T_company_only")
+        self.assertEqual(
+            company_only_ticket._get_project_domain(), [("active", "=", True)]
         )
 
-        # Get domain - should be only company domain
-        domain = ticket._get_project_domain()
-        self.assertEqual(domain, [("active", "=", True)])
-
-    def test_team_domain_combined_with_company(self):
-        """Test that team domain is combined with company domain using AND"""
-        # Set different domains (using widget domain format)
-        self.team.project_domain = "[('active', '=', False)]"
+        self._reset_domain_configuration()
         self.company.helpdesk_mgmt_project_domain = "[('active', '=', True)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be company AND team domain
-        domain = ticket._get_project_domain()
-        expected = expression.AND(
-            [
-                [("active", "=", True)],  # Company domain
-                [("active", "=", False)],  # Team domain
-            ]
-        )
-        self.assertEqual(domain, expected)
-
-    def test_complex_domain(self):
-        """Test complex domain with multiple conditions"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set complex domain (using widget domain format)
-        complex_domain = "[('active', '=', True), ('partner_id', '!=', False)]"
-        self.team.project_domain = complex_domain
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test Ticket Description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be only team domain since company is cleared
-        domain = ticket._get_project_domain()
-        # The domain should contain the team domain conditions
-        self.assertIn(("active", "=", True), domain)
-        self.assertIn(("partner_id", "!=", False), domain)
-
-    def test_invalid_domain(self):
-        """Test handling of invalid domain"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set invalid domain
-        self.team.project_domain = "[('invalid_field', '=', True)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test Ticket Description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - invalid domain should be ignored, so only company domain remains
-        domain = ticket._get_project_domain()
-        # The invalid domain is ignored, so we get whatever company domain exists
-        self.assertIsInstance(domain, list)
-
-    def test_no_domain(self):
-        """Test when no domain is set"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Create ticket without any domain
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test Ticket Description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should return empty list when no domains are set
-        domain = ticket._get_project_domain()
-        # If there's still a domain, it means there's a default somewhere
-        self.assertIsInstance(domain, list)
-
-    def test_domain_with_partner(self):
-        """Test domain filtering by partner"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Create partner
-        partner = self.env["res.partner"].create(
-            {
-                "name": "Test Partner",
-            }
-        )
-
-        # Set domain to filter by partner
-        self.team.project_domain = "[('partner_id', '=', %d)]" % partner.id
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain
-        domain = ticket._get_project_domain()
-        # The domain should contain the partner condition
-        self.assertIn(("partner_id", "=", partner.id), domain)
-
-    def test_python_domain_code(self):
-        """Test Python domain code functionality"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set Python code in team
-        python_code = """
-if ticket.partner_id:
-    domain = [('partner_id', '=', ticket.partner_id.id)]
-else:
-    domain = [('active', '=', True)]
-"""
-        self.team.project_domain_python = python_code
-
-        # Create ticket with partner
-        partner = self.env["res.partner"].create({"name": "Test Partner"})
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "partner_id": partner.id,
-            }
-        )
-
-        # Get domain - should use Python code result
-        domain = ticket._get_project_domain()
-        self.assertEqual(domain, [("partner_id", "=", partner.id)])
-
-    def test_python_domain_code_no_partner(self):
-        """Test Python domain code when ticket has no partner"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set Python code in team
-        python_code = """
-if ticket.partner_id:
-    domain = [('partner_id', '=', ticket.partner_id.id)]
-else:
-    domain = [('active', '=', True)]
-"""
-        self.team.project_domain_python = python_code
-
-        # Create ticket without partner
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should use Python code result
-        domain = ticket._get_project_domain()
-        self.assertEqual(domain, [("active", "=", True)])
-
-    def test_domain_combination_company_and_team(self):
-        """Test combination of company and team domains with AND logic"""
-        # Set different domains
-        self.company.helpdesk_mgmt_project_domain = "[('active', '=', True)]"
-        self.team.project_domain = "[('partner_id', '!=', False)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should combine both with AND
-        domain = ticket._get_project_domain()
-        expected = expression.AND(
+        self.helpdesk_team.project_domain = "[('name', 'ilike', 'Project')]"
+        combined_sources_ticket = self._create_ticket_minimal(name="T_both_sources")
+        expected_combined_domain = expression.AND(
             [
                 [("active", "=", True)],
-                [("partner_id", "!=", False)],
-            ]
-        )
-        self.assertEqual(domain, expected)
-
-    def test_domain_combination_all_sources(self):
-        """Test combination of company, team, and Python domains"""
-        # Set all three types of domains
-        self.company.helpdesk_mgmt_project_domain = "[('active', '=', True)]"
-        self.team.project_domain = "[('partner_id', '!=', False)]"
-        self.team.project_domain_python = """
-domain = [('name', 'ilike', 'Project')]
-"""
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should combine all three with AND
-        domain = ticket._get_project_domain()
-        expected = expression.AND(
-            [
-                [("active", "=", True)],
-                [("partner_id", "!=", False)],
                 [("name", "ilike", "Project")],
             ]
         )
-        self.assertEqual(domain, expected)
-
-    def test_compute_project_domain_ids(self):
-        """Test the computed field project_domain_ids"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set domain to filter active projects
-        self.team.project_domain = "[('active', '=', True)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
+        self.assertEqual(
+            combined_sources_ticket._get_project_domain(), expected_combined_domain
         )
 
-        # Check computed field
-        self.assertIn(self.project_1, ticket.project_domain_ids)
-        self.assertNotIn(self.project_2, ticket.project_domain_ids)
-
-    def test_get_project_domain_for_view(self):
-        """Test the _get_project_domain_for_view method"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set domain in team
-        self.team.project_domain = "[('active', '=', True)]"
-
-        # Test with active_id in context
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Test with active_id
-        domain = (
-            self.env["helpdesk.ticket"]
-            .with_context(active_id=ticket.id)
-            ._get_project_domain_for_view()
-        )
-        self.assertEqual(domain, [("active", "=", True)])
-
-        # Test with default_team_id in context
-        domain = (
-            self.env["helpdesk.ticket"]
-            .with_context(default_team_id=self.team.id)
-            ._get_project_domain_for_view()
-        )
-        self.assertEqual(domain, [("active", "=", True)])
-
-    # ========================================
-    # Task Domain Tests
-    # ========================================
-
-    def test_team_task_domain(self):
-        """Test task domain from team when company has no domain"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set domain in team (using widget domain format)
-        self.team.task_domain = "[('active', '=', True)]"
-
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be only team domain
-        domain = ticket._get_task_domain()
-        self.assertEqual(domain, [("active", "=", True)])
-
-    def test_company_task_domain(self):
-        """Test task domain from company when team has no domain"""
-        # Clear team domain first
-        self.team.task_domain = False
-
-        # Set domain in company
-        self.company.helpdesk_mgmt_task_domain = "[('active', '=', True)]"
-
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be only company domain
-        domain = ticket._get_task_domain()
-        self.assertEqual(domain, [("active", "=", True)])
-
-    def test_task_domain_combined_with_company(self):
-        """Test task domain combination: company + team domains"""
-        # Set domains in both company and team
-        self.company.helpdesk_mgmt_task_domain = "[('active', '=', True)]"
-        self.team.task_domain = "[('project_id', '!=', False)]"
-
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be combined with AND
-        domain = ticket._get_task_domain()
-        expected = expression.AND(
-            [[("active", "=", True)], [("project_id", "!=", False)]]
-        )
-        self.assertEqual(domain, expected)
-
-    def test_task_domain_combination_all_sources(self):
-        """Test task domain combination: company + team + python"""
-        # Set all domains
-        self.company.helpdesk_mgmt_task_domain = "[('active', '=', True)]"
-        self.team.task_domain = "[('project_id', '!=', False)]"
-        self.team.task_domain_python = "domain = [('user_id', '!=', False)]"
-
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be combined with AND
-        domain = ticket._get_task_domain()
-        expected = expression.AND(
-            [
-                [("active", "=", True)],
-                [("project_id", "!=", False)],
-                [("user_id", "!=", False)],
-            ]
-        )
-        self.assertEqual(domain, expected)
-
-    def test_task_domain_python_code(self):
-        """Test task domain with Python code"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set Python code in team
-        self.team.task_domain_python = """
-if ticket.project_id:
-    domain = [('project_id', '=', ticket.project_id.id)]
-else:
-    domain = [('id', '=', 0)]
-"""
-
-        # Create ticket with team and project
-        project = self.env["project.project"].create({"name": "Test Project"})
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "project_id": project.id,
-            }
-        )
-
-        # Get domain - should filter by project
-        domain = ticket._get_task_domain()
-        self.assertEqual(domain, [("project_id", "=", project.id)])
-
-    def test_task_domain_python_code_no_project(self):
-        """Test task domain with Python code when no project is set"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set Python code in team
-        self.team.task_domain_python = """
-if ticket.project_id:
-    domain = [('project_id', '=', ticket.project_id.id)]
-else:
-    domain = [('id', '=', 0)]
-"""
-
-        # Create ticket with team but no project
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should return empty domain
-        domain = ticket._get_task_domain()
-        self.assertEqual(domain, [("id", "=", 0)])
-
-    def test_compute_task_domain_ids(self):
-        """Test computed field for task domain IDs"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set domain in team
-        self.team.task_domain = "[('active', '=', True)]"
-
-        # Create some tasks
-        task1 = self.env["project.task"].create(
-            {
-                "name": "Task 1",
-                "active": True,
-            }
-        )
-        task2 = self.env["project.task"].create(
-            {
-                "name": "Task 2",
-                "active": False,
-            }
-        )
-
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Check computed field
-        self.assertIn(task1, ticket.task_domain_ids)
-        self.assertNotIn(task2, ticket.task_domain_ids)
-
-    def test_get_task_domain_for_view(self):
-        """Test _get_task_domain_for_view method"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set domain in team
-        self.team.task_domain = "[('active', '=', True)]"
-
-        # Test with active_id in context
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Test with active_id
-        domain = (
-            self.env["helpdesk.ticket"]
-            .with_context(active_id=ticket.id)
-            ._get_task_domain_for_view()
-        )
-        self.assertEqual(domain, [("active", "=", True)])
-
-        # Test with default_team_id in context
-        domain = (
-            self.env["helpdesk.ticket"]
-            .with_context(default_team_id=self.team.id)
-            ._get_task_domain_for_view()
-        )
-        self.assertEqual(domain, [("active", "=", True)])
-
-    def test_task_domain_with_partner(self):
-        """Test task domain with partner context"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set Python code that uses partner
-        self.team.task_domain_python = """
-if ticket.partner_id:
-    domain = [('partner_id', '=', ticket.partner_id.id)]
-else:
-    domain = [('id', '=', 0)]
-"""
-
-        # Create partner and ticket
-        partner = self.env["res.partner"].create({"name": "Test Partner"})
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "partner_id": partner.id,
-            }
-        )
-
-        # Get domain - should filter by partner
-        domain = ticket._get_task_domain()
-        self.assertIn(("partner_id", "=", partner.id), domain)
-
-    def test_task_domain_no_domain(self):
-        """Test task domain when no domains are set"""
-        # Clear all domains
-        self.company.helpdesk_mgmt_task_domain = False
-        self.team.task_domain = False
-        self.team.task_domain_python = False
-
-        # Create ticket with team
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Get domain - should be empty list
-        domain = ticket._get_task_domain()
-        self.assertIsInstance(domain, list)
-
-    def test_task_domain_with_project_filter(self):
-        """Test that task domain filters by selected project"""
-        # Create two projects
-        project1 = self.env["project.project"].create(
-            {
-                "name": "Project 1",
-                "active": True,
-            }
-        )
-        project2 = self.env["project.project"].create(
-            {
-                "name": "Project 2",
-                "active": True,
-            }
-        )
-
-        # Create tasks in each project
-        task1 = self.env["project.task"].create(
-            {
-                "name": "Task 1",
-                "project_id": project1.id,
-                "active": True,
-            }
-        )
-        task2 = self.env["project.task"].create(
-            {
-                "name": "Task 2",
-                "project_id": project2.id,
-                "active": True,
-            }
-        )
-
-        # Create ticket with project1 selected
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "project_id": project1.id,
-            }
-        )
-
-        # Get task domain - should only include tasks from project1
-        domain = ticket._get_task_domain()
-        self.assertIn(("project_id", "=", project1.id), domain)
-
-        # Verify that only task1 is available
-        available_tasks = self.env["project.task"].search(domain)
-        self.assertIn(task1, available_tasks)
-        self.assertNotIn(task2, available_tasks)
-
-        # Change project to project2
-        ticket.project_id = project2.id
-
-        # Get new task domain - should only include tasks from project2
-        domain = ticket._get_task_domain()
-        self.assertIn(("project_id", "=", project2.id), domain)
-
-        # Verify that only task2 is available now
-        available_tasks = self.env["project.task"].search(domain)
-        self.assertIn(task2, available_tasks)
-        self.assertNotIn(task1, available_tasks)
-
-    def test_task_domain_no_duplicate_project_filter(self):
-        """Test that project filter is not duplicated when Python code already
-        filters by project"""
-        # Create project
-        project = self.env["project.project"].create(
-            {
-                "name": "Test Project",
-                "active": True,
-            }
-        )
-
-        # Set Python code that already filters by project_id
-        self.team.task_domain_python = """
-if ticket.project_id:
-    domain = [('project_id', '=', ticket.project_id.id)]
-else:
-    domain = [('id', '=', 0)]
-"""
-
-        # Create ticket with project
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "project_id": project.id,
-            }
-        )
-
-        # Get domain - should not have duplicate project_id filters
-        domain = ticket._get_task_domain()
-
-        # Count occurrences of project_id filter
-        project_filters = [
-            cond
-            for cond in domain
-            if isinstance(cond, (list, tuple))
-            and len(cond) == 3
-            and cond[0] == "project_id"
-            and cond[1] == "="
-            and cond[2] == project.id
-        ]
-
-        # Should have exactly one project_id filter, not duplicated
-        self.assertEqual(len(project_filters), 1)
-        self.assertEqual(project_filters[0], ("project_id", "=", project.id))
-
-    # ========================================
-    # Onchange Methods Tests
-    # ========================================
-
-    def test_onchange_project_domain(self):
-        """Test _onchange_project_domain method (lines 65-67)"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set domain in team
-        self.team.project_domain = "[('active', '=', True)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Test onchange method
-        result = ticket._onchange_project_domain()
-
-        # Should return domain dict for project_id field
-        expected = {"domain": {"project_id": [("active", "=", True)]}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_project_domain_with_partner(self):
-        """Test _onchange_project_domain with partner change"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_project_domain = False
-
-        # Set Python domain code that uses partner
-        self.team.project_domain_python = """
+    def test_project_domain_python_and_safe_eval_error_paths(self):
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain_python = """
 if ticket.partner_id:
     domain = [('partner_id', '=', ticket.partner_id.id)]
 else:
     domain = [('active', '=', True)]
 """
+        partner = self.env["res.partner"].create({"name": "Partner A"})
+        partner_ticket = self._create_ticket_minimal(
+            name="T_py_partner", partner_id=partner.id
+        )
+        self.assertEqual(
+            partner_ticket._get_project_domain(), [("partner_id", "=", partner.id)]
+        )
 
-        # Create partner
-        partner = self.env["res.partner"].create({"name": "Test Partner"})
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain_python = "[('active', '=', True)]"
+        python_expression_ticket = self._create_ticket_minimal(name="T_py_expr_return")
+        self.assertEqual(
+            python_expression_ticket._get_project_domain(), [("active", "=", True)]
+        )
 
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
+        self._reset_domain_configuration()
+        self.company.helpdesk_mgmt_project_domain = "'not a domain'"
+        invalid_static_type_ticket = self._create_ticket_minimal(
+            name="T_invalid_safe_eval_type"
+        )
+        with self._mute_helpdesk_ticket_logger():
+            self.assertEqual(invalid_static_type_ticket._get_project_domain(), [])
+
+        self._reset_domain_configuration()
+        self.company.helpdesk_mgmt_project_domain = "[('active' = True)]"
+        invalid_static_syntax_ticket = self._create_ticket_minimal(
+            name="T_invalid_safe_eval_syntax"
+        )
+        with self._mute_helpdesk_ticket_logger():
+            self.assertEqual(invalid_static_syntax_ticket._get_project_domain(), [])
+
+        self._reset_domain_configuration()
+        safe_eval_helper_ticket = self._create_ticket_minimal(name="T_safe_eval_empty")
+        self.assertEqual(safe_eval_helper_ticket._safe_eval_domain_text(False), [])
+        self.assertEqual(safe_eval_helper_ticket._safe_eval_domain_text(""), [])
+        tuple_domain = safe_eval_helper_ticket._safe_eval_domain_text(
+            "(('active', '=', True),)"
+        )
+        self.assertEqual(tuple_domain, [("active", "=", True)])
+
+        self._reset_domain_configuration()
+        with self.assertRaises(ValidationError):
+            self.helpdesk_team.project_domain_python = "x +"
+
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain_python = "1/0"
+        runtime_error_ticket = self._create_ticket_minimal(name="T_py_runtime_error")
+        with self._mute_helpdesk_ticket_logger():
+            self.assertEqual(runtime_error_ticket._get_project_domain(), [])
+
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain_python = "domain = 1"
+        invalid_domain_type_ticket = self._create_ticket_minimal(
+            name="T_py_invalid_type"
+        )
+        with self._mute_helpdesk_ticket_logger():
+            self.assertEqual(invalid_domain_type_ticket._get_project_domain(), [])
+
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain_python = "raise Exception('Error Domain')"
+        explicit_exception_ticket = self._create_ticket_minimal(name="T_py_exception")
+        with self._mute_helpdesk_ticket_logger():
+            self.assertEqual(explicit_exception_ticket._get_project_domain(), [])
+
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain_python = ""
+        empty_python_ticket = self._create_ticket_minimal(name="T_empty_py")
+        self.assertEqual(empty_python_ticket._get_project_domain(), [])
+
+        exec_mode_ticket = self._create_ticket_minimal(name="T_run_python_exec_path")
+        exec_mode_domain = exec_mode_ticket._run_python_domain(
+            "42\n\ndomain = [('active', '=', True)]"
+        )
+        self.assertEqual(exec_mode_domain, [("active", "=", True)])
+
+        empty_recordset_domain = (
+            self.env["helpdesk.ticket"]
+            .browse()
+            ._run_python_domain("[('active', '=', True)]")
+        )
+        self.assertEqual(empty_recordset_domain, [("active", "=", True)])
+
+    def test_task_domain_filters_and_domain_contains_field(self):
+        self._reset_domain_configuration()
+        selected_project = self.active_project
+        matching_task = self.env["project.task"].create(
+            {"name": "Task 1", "project_id": selected_project.id}
+        )
+        non_matching_task = self.env["project.task"].create(
+            {"name": "Task 2", "project_id": self.inactive_project.id}
+        )
+        task_filter_ticket = self._create_ticket_minimal(
+            name="T_task_filter", project_id=selected_project.id
+        )
+        task_domain = task_filter_ticket._get_task_domain()
+        self.assertIn(("project_id", "=", selected_project.id), task_domain)
+        available_tasks = self.env["project.task"].search(task_domain)
+        self.assertIn(matching_task, available_tasks)
+        self.assertNotIn(non_matching_task, available_tasks)
+
+        self._reset_domain_configuration()
+        self.helpdesk_team.task_domain_python = (
+            "domain = [('project_id', '=', ticket.project_id.id)]"
+        )
+        no_duplicate_filter_ticket = self._create_ticket_minimal(
+            name="T_task_no_dup", project_id=selected_project.id
+        )
+        normalized_task_domain = expression.normalize_domain(
+            no_duplicate_filter_ticket._get_task_domain()
+        )
+        project_id_filters = [
+            leaf
+            for leaf in normalized_task_domain
+            if isinstance(leaf, (list, tuple))
+            and len(leaf) == 3
+            and leaf[0] == "project_id"
+            and leaf[1] == "="
+        ]
+        self.assertEqual(len(project_id_filters), 1)
+
+        recursive_domain = [
+            "|",
+            ("name", "=", "X"),
+            [
+                "&",
+                ("active", "=", True),
+                ("project_id", "=", self.active_project.id),
+            ],
+        ]
+        self.assertTrue(
+            no_duplicate_filter_ticket._domain_contains_field(
+                recursive_domain, "project_id"
+            )
+        )
+        self.assertFalse(
+            no_duplicate_filter_ticket._domain_contains_field(False, "project_id")
+        )
+        self.assertFalse(
+            no_duplicate_filter_ticket._domain_contains_field(
+                "not a domain", "project_id"
+            )
+        )
+        self.assertFalse(
+            no_duplicate_filter_ticket._domain_contains_field(
+                [("name", "=", "X")], "project_id"
+            )
+        )
+
+        no_project_ticket = self._create_ticket_minimal(name="T_no_project_selected")
+        no_project_domain = no_project_ticket._get_task_domain()
+        self.assertIsInstance(no_project_domain, list)
+
+    def test_views_onchange_compute_ids_and_create_multi_sanitization(self):
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain = "[('active', '=', True)]"
+        self.helpdesk_team.task_domain = (
+            "[('project_id', '=', %d)]" % self.active_project.id
+        )
+        view_ticket = self._create_ticket_minimal(
+            name="T_view", project_id=self.active_project.id
+        )
+
+        view_domain_calls = [
+            ("_get_project_domain_for_view", {"active_id": view_ticket.id}),
+            (
+                "_get_project_domain_for_view",
+                {"default_team_id": self.helpdesk_team.id},
+            ),
+            ("_get_project_domain_for_view", {}),
+            ("_get_task_domain_for_view", {"active_id": view_ticket.id}),
+            ("_get_task_domain_for_view", {"default_team_id": self.helpdesk_team.id}),
+            ("_get_task_domain_for_view", {}),
+        ]
+        for method_name, context_values in view_domain_calls:
+            with self.subTest(method=method_name, ctx=context_values):
+                model = self.env["helpdesk.ticket"].with_context(**context_values)
+                resolved_domain = getattr(model, method_name)()
+                self.assertIsInstance(resolved_domain, list)
+
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain = "[('active', '=', True)]"
+        onchange_project_ticket = self.env["helpdesk.ticket"].new(
             {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "partner_id": partner.id,
+                "name": "T_onchange_proj",
+                "description": "desc",
+                "team_id": self.helpdesk_team.id,
+                "project_id": self.inactive_project.id,
             }
         )
+        onchange_project_result = onchange_project_ticket._onchange_project_domain()
+        self.assertIsInstance(onchange_project_result, dict)
+        self.assertFalse(onchange_project_ticket.project_id)
+        self.assertFalse(onchange_project_ticket.task_id)
+        self.assertIn("domain", onchange_project_result)
+        self.assertIn("project_id", onchange_project_result["domain"])
 
-        # Test onchange method
-        result = ticket._onchange_project_domain()
-
-        # Should return domain dict with partner filter
-        expected = {"domain": {"project_id": [("partner_id", "=", partner.id)]}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_project_domain_no_domain(self):
-        """Test _onchange_project_domain when no domain is set"""
-        # Clear all domains
-        self.company.helpdesk_mgmt_project_domain = False
-        self.team.project_domain = False
-        self.team.project_domain_python = False
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
+        self._reset_domain_configuration()
+        valid_project = self.active_project
+        invalid_project = self.inactive_project
+        invalid_task_for_project = self.env["project.task"].create(
+            {"name": "Bad", "project_id": invalid_project.id}
+        )
+        self.helpdesk_team.task_domain = "[('project_id', '=', %d)]" % valid_project.id
+        onchange_task_ticket = self.env["helpdesk.ticket"].new(
             {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
+                "name": "T_onchange_task",
+                "description": "desc",
+                "team_id": self.helpdesk_team.id,
+                "project_id": valid_project.id,
+                "task_id": invalid_task_for_project.id,
             }
         )
+        onchange_task_result = onchange_task_ticket._onchange_task_domain()
+        self.assertIsInstance(onchange_task_result, dict)
+        self.assertFalse(onchange_task_ticket.task_id)
+        self.assertIn("domain", onchange_task_result)
+        self.assertIn("task_id", onchange_task_result["domain"])
 
-        # Test onchange method
-        result = ticket._onchange_project_domain()
+        self._reset_domain_configuration()
+        compute_all_ticket = self._create_ticket_minimal(name="T_compute_no_domain")
+        self.assertTrue(hasattr(compute_all_ticket, "project_domain_ids"))
+        self.assertTrue(hasattr(compute_all_ticket, "task_domain_ids"))
+        self.assertIn(self.active_project, compute_all_ticket.project_domain_ids)
 
-        # Should return empty domain
-        expected = {"domain": {"project_id": []}}
-        self.assertEqual(result, expected)
+        self._reset_domain_configuration()
+        self.helpdesk_team.project_domain = "[('id', '=', -1)]"
+        self.company.helpdesk_mgmt_task_domain = "[('id', '=', -1)]"
+        compute_none_ticket = self._create_ticket_minimal(
+            name="T_compute_domain_matches_none", project_id=self.active_project.id
+        )
+        self.assertEqual(len(compute_none_ticket.project_domain_ids), 0)
+        self.assertEqual(len(compute_none_ticket.task_domain_ids), 0)
 
-    def test_onchange_task_domain(self):
-        """Test _onchange_task_domain method (lines 72-74)"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
+        self._reset_domain_configuration()
+        valid_task = self.env["project.task"].create(
+            {"name": "Good", "project_id": valid_project.id}
+        )
+        invalid_task = self.env["project.task"].create(
+            {"name": "Bad2", "project_id": invalid_project.id}
+        )
+        self.helpdesk_team.project_domain = "[('active', '=', True)]"
+        self.helpdesk_team.task_domain = "[('project_id','=',%d)]" % valid_project.id
 
-        # Set domain in team
-        self.team.task_domain = "[('active', '=', True)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
+        created_tickets = self.env["helpdesk.ticket"].create(
+            [
+                {
+                    "name": "T_multi_1",
+                    "description": "desc",
+                    "team_id": self.helpdesk_team.id,
+                    "project_id": str(valid_project.id),
+                    "task_id": str(valid_task.id),
+                },
+                {
+                    "name": "T_multi_2",
+                    "description": "desc",
+                    "team_id": self.helpdesk_team.id,
+                    "project_id": str(valid_project.id),
+                    "task_id": str(invalid_task.id),
+                },
+                {
+                    "name": "T_multi_3",
+                    "description": "desc",
+                    "team_id": self.helpdesk_team.id,
+                    "project_id": str(invalid_project.id),
+                    "task_id": str(valid_task.id),
+                },
+            ]
         )
 
-        # Test onchange method
-        result = ticket._onchange_task_domain()
+        self.assertEqual(len(created_tickets), 3)
 
-        # Should return domain dict for task_id field
-        expected = {"domain": {"task_id": [("active", "=", True)]}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_task_domain_with_project(self):
-        """Test _onchange_task_domain with project selected"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Create project
-        project = self.env["project.project"].create(
-            {
-                "name": "Test Project",
-                "active": True,
-            }
+        first_ticket, second_ticket, third_ticket = (
+            created_tickets[0],
+            created_tickets[1],
+            created_tickets[2],
         )
 
-        # Create ticket with project
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "project_id": project.id,
-            }
-        )
+        self.assertEqual(first_ticket.project_id, valid_project)
+        self.assertEqual(first_ticket.task_id, valid_task)
 
-        # Test onchange method
-        result = ticket._onchange_task_domain()
+        self.assertEqual(second_ticket.project_id, valid_project)
+        self.assertFalse(second_ticket.task_id)
 
-        # Should return domain dict with project filter
-        expected = {"domain": {"task_id": [("project_id", "=", project.id)]}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_task_domain_python_code(self):
-        """Test _onchange_task_domain with Python code"""
-        # Clear company domain first
-        self.company.helpdesk_mgmt_task_domain = False
-
-        # Set Python domain code
-        self.team.task_domain_python = """
-if ticket.project_id:
-    domain = [('project_id', '=', ticket.project_id.id)]
-else:
-    domain = [('id', '=', 0)]
-"""
-
-        # Create project
-        project = self.env["project.project"].create(
-            {
-                "name": "Test Project",
-                "active": True,
-            }
-        )
-
-        # Create ticket with project
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-                "project_id": project.id,
-            }
-        )
-
-        # Test onchange method
-        result = ticket._onchange_task_domain()
-
-        # Should return domain dict with project filter from Python code
-        expected = {"domain": {"task_id": [("project_id", "=", project.id)]}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_task_domain_no_domain(self):
-        """Test _onchange_task_domain when no domain is set"""
-        # Clear all domains
-        self.company.helpdesk_mgmt_task_domain = False
-        self.team.task_domain = False
-        self.team.task_domain_python = False
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Test onchange method
-        result = ticket._onchange_task_domain()
-
-        # Should return empty domain
-        expected = {"domain": {"task_id": []}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_project_domain_combined_domains(self):
-        """Test _onchange_project_domain with combined company and team domains"""
-        # Set both company and team domains
-        self.company.helpdesk_mgmt_project_domain = "[('active', '=', True)]"
-        self.team.project_domain = "[('partner_id', '!=', False)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Test onchange method
-        result = ticket._onchange_project_domain()
-
-        # Should return combined domain
-        expected_domain = expression.AND(
-            [[("active", "=", True)], [("partner_id", "!=", False)]]
-        )
-        expected = {"domain": {"project_id": expected_domain}}
-        self.assertEqual(result, expected)
-
-    def test_onchange_task_domain_combined_domains(self):
-        """Test _onchange_task_domain with combined company and team domains"""
-        # Set both company and team domains
-        self.company.helpdesk_mgmt_task_domain = "[('active', '=', True)]"
-        self.team.task_domain = "[('project_id', '!=', False)]"
-
-        # Create ticket
-        ticket = self.env["helpdesk.ticket"].create(
-            {
-                "name": "Test Ticket",
-                "description": "Test ticket description",
-                "team_id": self.team.id,
-            }
-        )
-
-        # Test onchange method
-        result = ticket._onchange_task_domain()
-
-        # Should return combined domain
-        expected_domain = expression.AND(
-            [[("active", "=", True)], [("project_id", "!=", False)]]
-        )
-        expected = {"domain": {"task_id": expected_domain}}
-        self.assertEqual(result, expected)
+        self.assertFalse(third_ticket.project_id)
+        self.assertFalse(third_ticket.task_id)
