@@ -4,7 +4,7 @@
 {
     "name": "Helpdesk/Project stage synchronization",
     "summary": "Keeps the stages of tickets and tasks in sync",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "development_status": "Alpha",
     "category": "After-Sales",
     "website": "https://github.com/OCA/helpdesk",
