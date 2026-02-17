@@ -6,35 +6,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-02-17 18:47+0000\n"
+"Last-Translator: Peter Dovicovic <dovicovic@gmail.com>\n"
 "Language-Team: none\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: helpdesk_mgmt
 #. odoo-javascript
 #: code:addons/helpdesk_mgmt/static/src/js/new_ticket.js:0
 #, python-format
 msgid "%s file exceed the maximum file size of %s."
-msgstr ""
+msgstr "%s súbor prekročil maximálnu povolenú veľkosť %s."
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 msgid "<em class=\"font-weight-normal text-muted\">Tickets in category:</em>"
 msgstr ""
+"<em class=\"font-weight-normal text-muted\">Tikety podľa kategórie:</em>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 msgid "<em class=\"font-weight-normal text-muted\">Tickets in stage:</em>"
-msgstr ""
+msgstr "<em class=\"font-weight-normal text-muted\">Tikety v štádiu:</em>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_new_button
 msgid "<i class=\"fa fa-plus me-1\"/><span>New</span>"
-msgstr ""
+msgstr "<i class=\"fa fa-plus me-1\"/><span>Nový</span>"
 
 #. module: helpdesk_mgmt
 #: model:mail.template,body_html:helpdesk_mgmt.assignment_email_template
@@ -47,7 +50,7 @@ msgstr ""
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
 msgid "<small class=\"text-right\">Stage:</small>"
-msgstr ""
+msgstr "<small class=\"text-right\">Štádium:</small>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_kanban_view
@@ -99,7 +102,7 @@ msgstr ""
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
 msgid "<strong>Last Stage Update:</strong>"
-msgstr ""
+msgstr "<strong>Poslednej zmeny štádia:</strong>"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
@@ -301,12 +304,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_kanban_view
 #, python-format
 msgid "All"
-msgstr ""
+msgstr "Všetko"
 
 #. module: helpdesk_mgmt
 #: model:ir.ui.menu,name:helpdesk_mgmt.helpdesk_ticket_menu
 msgid "All Tickets"
-msgstr ""
+msgstr "Všeky tikety"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,help:helpdesk_mgmt.field_helpdesk_ticket_team__show_in_portal
@@ -396,7 +399,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 #, python-format
 msgid "Category"
-msgstr ""
+msgstr "Kategória"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__channel_id
@@ -540,14 +543,14 @@ msgstr ""
 #: code:addons/helpdesk_mgmt/models/helpdesk_ticket.py:0
 #, python-format
 msgid "Customer"
-msgstr ""
+msgstr "Zákazník"
 
 #. module: helpdesk_mgmt
 #. odoo-python
 #: code:addons/helpdesk_mgmt/models/helpdesk_ticket.py:0
 #, python-format
 msgid "Customer Email"
-msgstr ""
+msgstr "Zákaznícky email"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,help:helpdesk_mgmt.field_helpdesk_ticket__access_url
@@ -907,7 +910,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 #, python-format
 msgid "Last Stage Update"
-msgstr ""
+msgstr "Posledná zmena štádia"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__write_uid
@@ -1013,7 +1016,7 @@ msgstr ""
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_tickets
 msgid "New Ticket"
-msgstr ""
+msgstr "Nový tiket"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.res_config_settings_view_form
@@ -1025,7 +1028,7 @@ msgstr ""
 #: code:addons/helpdesk_mgmt/controllers/myaccount.py:0
 #, python-format
 msgid "Newest"
-msgstr ""
+msgstr "Najnovšie"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__activity_date_deadline
@@ -1047,7 +1050,7 @@ msgstr ""
 #: code:addons/helpdesk_mgmt/models/helpdesk_ticket.py:0
 #, python-format
 msgid "No Subject"
-msgstr ""
+msgstr "Bez subjektu"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_my_tickets
@@ -1059,7 +1062,7 @@ msgstr ""
 #: code:addons/helpdesk_mgmt/controllers/myaccount.py:0
 #, python-format
 msgid "None"
-msgstr ""
+msgstr "Žiadne"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_view_search
@@ -1272,21 +1275,21 @@ msgstr ""
 #: code:addons/helpdesk_mgmt/controllers/myaccount.py:0
 #, python-format
 msgid "Search in All"
-msgstr ""
+msgstr "Vyhľadať vo všetkom"
 
 #. module: helpdesk_mgmt
 #. odoo-python
 #: code:addons/helpdesk_mgmt/controllers/myaccount.py:0
 #, python-format
 msgid "Search in Number"
-msgstr ""
+msgstr "Vyhľadať podľa čísla"
 
 #. module: helpdesk_mgmt
 #. odoo-python
 #: code:addons/helpdesk_mgmt/controllers/myaccount.py:0
 #, python-format
 msgid "Search in Title"
-msgstr ""
+msgstr "Vyhľadávať v názve"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__access_token
@@ -1302,7 +1305,7 @@ msgstr ""
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_create_ticket
 msgid "Send a new ticket"
-msgstr ""
+msgstr "Poslať nový tiket"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__sequence
@@ -1360,7 +1363,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 #, python-format
 msgid "Stage"
-msgstr ""
+msgstr "Štádium"
 
 #. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_stage__name
@@ -1568,7 +1571,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_ticket_list
 #, python-format
 msgid "Title"
-msgstr ""
+msgstr "Názvu"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_kanban_view
