@@ -110,6 +110,11 @@ msgid "Helpdesk Ticket Team"
 msgstr ""
 
 #. module: helpdesk_mgmt_project_domain
+#: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket__project_id
+msgid "Project"
+msgstr ""
+
+#. module: helpdesk_mgmt_project_domain
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_project_domain.res_config_settings_view_form_project_domain
 msgid "Project &amp; Task Domain Configuration"
 msgstr ""
@@ -137,7 +142,7 @@ msgstr ""
 
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,help:helpdesk_mgmt_project_domain.field_helpdesk_ticket__project_domain_ids
-msgid "Projects available for selection based on domain rules"
+msgid "Projects available for selection based on domain rules."
 msgstr ""
 
 #. module: helpdesk_mgmt_project_domain
@@ -179,6 +184,11 @@ msgid ""
 msgstr ""
 
 #. module: helpdesk_mgmt_project_domain
+#: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket__task_id
+msgid "Task"
+msgstr ""
+
+#. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket_team__task_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_res_company__helpdesk_mgmt_task_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_res_config_settings__helpdesk_mgmt_task_domain
@@ -201,5 +211,5 @@ msgstr ""
 
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,help:helpdesk_mgmt_project_domain.field_helpdesk_ticket__task_domain_ids
-msgid "Tasks available for selection based on domain rules"
+msgid "Tasks available for selection based on domain rules."
 msgstr ""
