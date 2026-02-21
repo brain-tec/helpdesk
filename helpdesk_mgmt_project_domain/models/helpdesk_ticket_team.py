@@ -44,7 +44,6 @@ DEFAULT_TASK_PYTHON_CODE = """# Available variables:
 
 
 class HelpdeskTicketTeam(models.Model):
-
     _inherit = "helpdesk.ticket.team"
 
     project_domain = fields.Char(
