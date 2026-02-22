@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-10-02 18:43+0000\n"
+"PO-Revision-Date: 2026-02-21 09:51+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket__project_domain_ids
@@ -142,7 +142,7 @@ msgstr "Team ticket assistenza clienti"
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket__project_id
 msgid "Project"
-msgstr ""
+msgstr "Progetto"
 
 #. module: helpdesk_mgmt_project_domain
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_project_domain.res_config_settings_view_form_project_domain
@@ -173,7 +173,7 @@ msgstr "Codice Python dominio progetto: %s"
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,help:helpdesk_mgmt_project_domain.field_helpdesk_ticket__project_domain_ids
 msgid "Projects available for selection based on domain rules."
-msgstr ""
+msgstr "Progetti disponibili per la selezione in base alle regole di dominio."
 
 #. module: helpdesk_mgmt_project_domain
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_project_domain.view_helpdesk_team_form_project_domain
@@ -236,7 +236,7 @@ msgstr ""
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket__task_id
 msgid "Task"
-msgstr ""
+msgstr "Lavoro"
 
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,field_description:helpdesk_mgmt_project_domain.field_helpdesk_ticket_team__task_domain
@@ -262,7 +262,7 @@ msgstr "Codice Python dominio lavoro: %s"
 #. module: helpdesk_mgmt_project_domain
 #: model:ir.model.fields,help:helpdesk_mgmt_project_domain.field_helpdesk_ticket__task_domain_ids
 msgid "Tasks available for selection based on domain rules."
-msgstr ""
+msgstr "Lavori disponibili per la selezione in base alle regole di dominio."
 
 #~ msgid "Projects available for selection based on domain rules"
 #~ msgstr ""
