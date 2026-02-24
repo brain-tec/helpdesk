@@ -21,7 +21,7 @@
         <field name="view_mode">kanban,tree,pivot,graph,form</field>
         <field
             name="domain"
-        >[('consumed','=',True), ('res_model','=','helpdesk.ticket'), ('res_id', '=', active_id)]</field>
+        >[('consumed','=',True), ('res_model','=','helpdesk.ticket'), ('res_id', '=', id)]</field>
         <field name="help" type="html">
             <p>
                 There are no ratings for this ticket at the moment.
