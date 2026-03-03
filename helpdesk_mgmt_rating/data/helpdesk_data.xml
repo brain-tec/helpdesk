@@ -119,9 +119,10 @@
                             <td style="padding-top:10px;color:#afafaf;">
                                 <t t-if="object.rating_status == 'stage_change'">
                                     <p
-                                    >This customer survey has been sent because your ticket has been moved to the stage <b
-                                            t-out="object.stage_id.name"
-                                        /></p>
+                                    >This customer survey has been sent because your ticket has been moved to the stage
+                                    <b
+                                            t-out="object.stage_id.name or ''"
+                                        >In progress</b></p>
                                 </t>
                             </td>
                         </tr>
