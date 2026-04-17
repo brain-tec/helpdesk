@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [helpdesk_mgmt_sale](helpdesk_mgmt_sale/) | 17.0.1.0.2 |  | Add the option to select project in the sale orders.
 [helpdesk_mgmt_sla](helpdesk_mgmt_sla/) | 17.0.1.0.0 |  | Add SLA to the tickets for Helpdesk Management.
 [helpdesk_mgmt_stage_validation](helpdesk_mgmt_stage_validation/) | 17.0.1.1.0 |  | Validate input data when reaching a Helpdesk Ticket stage
+[helpdesk_mgmt_team_partner](helpdesk_mgmt_team_partner/) | 17.0.1.0.0 |  | Allows dynamic control over which contact (partner_id) on ticket, based on the configuration of the assigned Helpdesk Team (team_id)
 [helpdesk_mgmt_template](helpdesk_mgmt_template/) | 17.0.1.0.0 |  | Create Helpdesk Ticket Template
 [helpdesk_mgmt_timesheet](helpdesk_mgmt_timesheet/) | 17.0.1.0.4 |  | Add HR Timesheet to the tickets for Helpdesk Management.
 [helpdesk_mgmtsystem_nonconformity](helpdesk_mgmtsystem_nonconformity/) | 17.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Links helpdesk tickets with nonconformities
