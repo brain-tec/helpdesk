@@ -7,7 +7,7 @@
     "version": "18.0.1.2.1",
     "license": "AGPL-3",
     "summary": "Add a type to your tickets",
-    "author": "Konos, " "Open Source Integrators, " "Odoo Community Association (OCA)",
+    "author": "Konos, Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/helpdesk",
     "depends": ["helpdesk_mgmt"],
     "data": [
