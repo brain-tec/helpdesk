@@ -32,7 +32,8 @@ Helpdesk Product
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds the option to select product in the helpdesk tickets.
+This module adds the option to select product in the helpdesk tickets
+and view tickets related to products.
 
 **Table of contents**
 
@@ -63,6 +64,10 @@ Contributors
 - `ForgeFlow <https://www.forgeflow.com>`__:
 
   - Maria Buscallà <maria.buscalla@forgeflow.com>
+
+- `Tecnativa <https://www.tecnativa.com>`__:
+
+  - David Bañón Gil
 
 Maintainers
 -----------
