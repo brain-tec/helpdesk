@@ -17,19 +17,35 @@ class MailThread(models.AbstractModel):
             if email_from:
                 email_from = email_normalize(email_from)
 
-            if ticket_id:
-                ticket = self.env["helpdesk.ticket"].sudo().browse(int(ticket_id))
-                if ticket and routes[0][3]:
-                    partner_id = (
+            ticket = self.env["helpdesk.ticket"].sudo().browse(int(ticket_id)).exists()
+            user_id = routes[0][3]
+            if ticket:
+                if not (
+                    ticket.team_id.autoupdate_ticket_stage
+                    and ticket.stage_id in ticket.team_id.autopupdate_src_stage_ids
+                ):
+                    return None
+
+                update_stage = False
+                email_partner = False
+                if ticket.partner_email == email_from:
+                    update_stage = True
+
+                ticket_partner = ticket.partner_id
+                if user_id:
+                    email_partner = (
                         self.env["res.users"]
-                        .search([("id", "=", routes[0][3])], limit=1)
-                        .partner_id.id
+                        .search([("id", "=", user_id)], limit=1)
+                        .partner_id
                     )
-                    partner_matches = partner_id and partner_id == ticket.partner_id.id
-                    partner_email_matches = ticket.partner_id.email == email_from
-                    if (
-                        (partner_matches or partner_email_matches)
-                        and ticket.team_id.autoupdate_ticket_stage
-                        and ticket.stage_id in ticket.team_id.autopupdate_src_stage_ids
-                    ):
-                        ticket.stage_id = ticket.team_id.autopupdate_dest_stage_id.id
+                if email_partner and ticket_partner:
+                    update_stage = email_partner.id == ticket_partner.id
+                elif email_partner:
+                    update_stage = email_partner.email == ticket.partner_email
+                elif ticket_partner:
+                    update_stage = ticket_partner.email == email_from
+
+                if update_stage:
+                    ticket.stage_id = ticket.team_id.autopupdate_dest_stage_id.id
+
+        return None
