@@ -22,7 +22,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[helpdesk_mgmt](helpdesk_mgmt/) | 19.0.1.0.1 |  | Helpdesk
+[helpdesk_mgmt](helpdesk_mgmt/) | 19.0.1.1.0 |  | Helpdesk
 
 [//]: # (end addons)
 
