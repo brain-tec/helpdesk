@@ -8,7 +8,7 @@
             <form string="Type">
                 <group>
                     <field name="name" />
-                    <field name="team_ids" />
+                    <field name="team_ids" widget="many2many_tags" />
                 </group>
             </form>
         </field>
