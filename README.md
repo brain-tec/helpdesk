@@ -23,6 +23,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [helpdesk_mgmt](helpdesk_mgmt/) | 19.0.1.1.0 |  | Helpdesk
+[helpdesk_product](helpdesk_product/) | 19.0.1.0.0 |  | Add the option to select product in the tickets.
 
 [//]: # (end addons)
 
