@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ================
 Helpdesk Product
 ================
@@ -17,7 +13,7 @@ Helpdesk Product
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fhelpdesk-lightgray.png?logo=github
@@ -32,7 +28,8 @@ Helpdesk Product
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds the option to select product in the helpdesk tickets.
+This module adds the option to select product in the helpdesk tickets
+and view tickets related to products.
 
 **Table of contents**
 
@@ -63,6 +60,10 @@ Contributors
 - `ForgeFlow <https://www.forgeflow.com>`__:
 
   - Maria Buscallà <maria.buscalla@forgeflow.com>
+
+- `Tecnativa <https://www.tecnativa.com>`__:
+
+  - David Bañón Gil
 
 Maintainers
 -----------

@@ -1,7 +1,7 @@
 {
     "name": "Helpdesk Product",
     "summary": "Add the option to select product in the tickets.",
-    "author": "ForgeFlow, " "Odoo Community Association (OCA)",
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "version": "18.0.1.0.1",
     "license": "AGPL-3",
     "category": "After-Sales",
