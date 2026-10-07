@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-07-16 08:46+0000\n"
+"PO-Revision-Date: 2026-10-01 08:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -43,6 +43,12 @@ msgid ""
 "                </p>\n"
 "            "
 msgstr ""
+"<p>Salve <t t-out=\"object.partner_name or object.partner_id.name\"/>,</p>\n"
+"                <p>\n"
+"                    lo stato del  ticket <t t-out=\"object.display_name\"/>\n"
+"                    è passato a <t t-out=\"object.stage_id.name\"/>.\n"
+"                </p>\n"
+"            "
 
 #. module: helpdesk_mgmt
 #: model:mail.template,body_html:helpdesk_mgmt.closed_ticket_template
@@ -52,6 +58,10 @@ msgid ""
 "closed.</p>\n"
 "            "
 msgstr ""
+"<p>Salve <t t-out=\"object.partner_name or object.partner_id.name\"/>,</p>\n"
+"                <p>il ticket <t t-out=\"object.display_name\"/> è stato "
+"chiuso.</p>\n"
+"            "
 
 #. module: helpdesk_mgmt
 #: model:mail.template,body_html:helpdesk_mgmt.assignment_email_template
@@ -61,6 +71,10 @@ msgid ""
 "to <t t-out=\"object.user_id.name\"/>.</p>\n"
 "            "
 msgstr ""
+"<p>Salve <t t-out=\"object.partner_name or object.partner_id.name\"/>,</p>\n"
+"                <p>il ticket <t t-out=\"object.number\"/> è stato assegnato "
+"a <t t-out=\"object.user_id.name\"/>.</p>\n"
+"            "
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.portal_helpdesk_ticket_page
@@ -904,6 +918,11 @@ msgid "In Progress"
 msgstr "In corso"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__notes
+msgid "Internal notes"
+msgstr ""
+
+#. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__message_is_follower
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__message_is_follower
 msgid "Is Follower"
@@ -1288,6 +1307,11 @@ msgid "Priority tickets"
 msgstr "Ticket prioritari"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__properties
+msgid "Properties"
+msgstr "Proprietà"
+
+#. module: helpdesk_mgmt
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket__rating_ids
 #: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__rating_ids
 msgid "Ratings"
@@ -1612,6 +1636,11 @@ msgid "Ticket Created"
 msgstr "Ticket creato"
 
 #. module: helpdesk_mgmt
+#: model:ir.model.fields,field_description:helpdesk_mgmt.field_helpdesk_ticket_team__ticket_properties
+msgid "Ticket Properties"
+msgstr "Proprietà ticket"
+
+#. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.view_helpdesk_ticket_stage_search
 msgid "Ticket Stage Search"
 msgstr "Ricerca fase Ticket"
@@ -1717,6 +1746,11 @@ msgid "Unattended tickets"
 msgstr "Ticket non gestiti"
 
 #. module: helpdesk_mgmt
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_view_search
+msgid "Unread Messages"
+msgstr "Messaggi non letti"
+
+#. module: helpdesk_mgmt
 #: model:ir.model,name:helpdesk_mgmt.model_res_users
 #: model:res.groups,name:helpdesk_mgmt.group_helpdesk_user
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.helpdesk_ticket_view_search
@@ -1759,7 +1793,7 @@ msgstr "Messaggi sito web"
 #: model:ir.model.fields,help:helpdesk_mgmt.field_helpdesk_ticket__website_message_ids
 #: model:ir.model.fields,help:helpdesk_mgmt.field_helpdesk_ticket_team__website_message_ids
 msgid "Website communication history"
-msgstr "Storico comunicazioni sito web"
+msgstr "Cronologia comunicazioni sito web"
 
 #. module: helpdesk_mgmt
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt.res_config_settings_view_form
@@ -2565,9 +2599,6 @@ msgstr ""
 
 #~ msgid "Number of unread messages"
 #~ msgstr "Numero di messaggi non letti"
-
-#~ msgid "Unread Messages"
-#~ msgstr "Messaggi non letti"
 
 #~ msgid "Unread Messages Counter"
 #~ msgstr "Contatore messaggi non letti"

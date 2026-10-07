@@ -65,6 +65,7 @@ class HelpdeskTicket(models.Model):
     number = fields.Char(string="Ticket number", default="/", readonly=True)
     name = fields.Char(string="Title", required=True)
     description = fields.Html(required=True, sanitize_style=True)
+    notes = fields.Html(string="Internal notes")
     user_id = fields.Many2one(
         comodel_name="res.users",
         string="Assigned user",
@@ -158,6 +159,9 @@ class HelpdeskTicket(models.Model):
         help="Gives the sequence order when displaying a list of tickets.",
     )
     active = fields.Boolean(default=True)
+    properties = fields.Properties(
+        definition="team_id.ticket_properties", copy=True, precompute=False
+    )
 
     duplicate_id = fields.Many2one(
         "helpdesk.ticket", string="Duplicate of", tracking=True, copy=False
